@@ -1,0 +1,10 @@
+# Corpus brut trop volumineux pour GitHub (>100 Mo) — voir README pour le retélécharger
+RapFr.csv
+
+# Environnement Python local
+.venv/
+__pycache__/
+*.pyc
+
+# Checkpoints Jupyter
+.ipynb_checkpoints/

@@ -1,0 +1,47 @@
+# ProjetRap — Analyse du corpus RapFr
+
+## Contexte
+
+Ce projet s'inscrit dans le cadre du cours d'application des méthodes de **data science et d'intelligence artificielle à l'analyse de corpus volumineux**, du parcours **CPES Sciences des données, Arts et Cultures (DAC)**, porté par l'[Université PSL](https://psl.eu/) et le [Lycée Louis-le-Grand](https://www.louislegrand.fr/) :
+- Page du parcours : [psl.eu/formation/cpes-psl-louis-le-grand](https://psl.eu/formation/cpes-psl-louis-le-grand)
+
+Ce cours mobilise également les ressources de l'[Institut ACSS-PSL](https://acss-dig.psl.eu/) (Applied Computational Social Sciences), dont l'auteur de ce projet est membre.
+
+Le corpus étudié (`RapFr.csv`) rassemble des textes de chansons de rap français ainsi qu'un ensemble de variables quantitatives et qualitatives associées (popularité, longueur des textes, tonalité, informations sur les artistes, etc.).
+
+## Source des données
+
+`RapFr.csv` correspond au corpus **LRFAF** (37 307 chansons de rap français issues de genius.com, croisées avec Wikipédia/Wikidata), constitué par Benoît de Courson (regicid) :
+- Jeu de données : [huggingface.co/datasets/regicid/LRFAF](https://huggingface.co/datasets/regicid/LRFAF)
+- Article associé : Benoît de Courson, *« LRFAF : une exploration numérique du rap français depuis les années 1990 »* — [researchgate.net/publication/379061284](https://www.researchgate.net/publication/379061284_LRFAF_une_exploration_numerique_du_rap_francais_depuis_les_annees_1990)
+- Exploration interactive des fréquences lexicales du corpus : [Gallicagram, corpus « Rap »](https://shiny.ens-paris-saclay.fr/app/gallicagram)
+
+Ce corpus est distribué pour un usage de recherche, sans licence formelle (les ayants droit restant les artistes).
+
+## Installation
+
+`RapFr.csv` (~114 Mo) dépasse la limite de 100 Mo par fichier de GitHub : il n'est donc **pas versionné** dans ce dépôt (voir `.gitignore`). Pour reconstituer le fichier avant d'exécuter les notebooks, télécharger le corpus depuis Hugging Face et le placer à la racine du dépôt sous le nom `RapFr.csv` :
+
+```powershell
+Invoke-WebRequest -Uri "https://huggingface.co/datasets/regicid/LRFAF/resolve/main/corpus.csv?download=true" -OutFile "RapFr.csv"
+```
+
+## État d'avancement
+
+Les notebooks livrés dans ce dépôt sont des **premiers jets**. Ils posent une structure d'analyse de base (chargement, description, distributions, évolution temporelle) mais ne sont pas définitifs.
+
+**Le travail demandé aux étudiants est de :**
+- affiner les scripts fournis (choix des variables clés, filtres, granularité temporelle, présentation des graphiques...) ;
+- surtout, **mettre en valeur des faits remarquables** repérés dans les données, en les commentant et en les interprétant.
+
+## Organisation du dépôt
+
+- Les scripts et notebooks (`.py`, `.ipynb`) restent à la racine du dépôt.
+- `images/` : figures générées par les notebooks (graphiques exportés en `.png`).
+- `result/` : tables et CSV de résultats produits par les notebooks (résumés, agrégats).
+
+Voir les skills [`notebook-authoring`](.github/skills/notebook-authoring/SKILL.md) et [`export-organization`](.github/skills/export-organization/SKILL.md) pour les conventions détaillées de rédaction des notebooks et d'organisation des exports.
+
+## Notebooks
+
+- [`01_description_variables_quantitatives.ipynb`](01_description_variables_quantitatives.ipynb) : description des variables quantitatives du corpus (statistiques descriptives, distributions, évolution des moyennes annuelles).
