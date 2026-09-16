@@ -1,0 +1,10 @@
+metric,value
+total_vocabulary,379546.0
+unique_words,18657621.0
+global_ttr,0.02034267927298984
+mean_ttr_doc,0.5074932144816153
+ttr_min,0.02745995423340961
+ttr_max,1.0
+ttr_median,0.49784791965566716
+rare_words,173705.0
+pct_rare_words,45.766521054101474

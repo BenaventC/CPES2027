@@ -2,6 +2,24 @@
 # locally and regenerated from the notebooks.
 corpus.csv
 RapFr.csv
+corpus_backup.csv
+corpus_clean.csv
+
+# Generated structured outputs: keep only full-corpus deliverables in Git.
+# Pilot, percentage-based, temporary, and server-log outputs stay local.
+export/*
+!export/*full*
+!export/*_full_*
+!export/R00_*
+!export/.gitkeep
+
+# Generated figures follow the same policy: retain full-corpus and R00 figures.
+images/*
+!images/*full*
+!images/*_full_*
+!images/R00_*
+!images/.gitkeep
+
 export/.pos_*_parts/
 export/pos_*_conllu.csv
 export/.bge_m3_*_parts/
@@ -9,6 +27,8 @@ export/bge_m3_*_group_embeddings.npy
 export/bge_m3_*_song_embeddings.npy
 export/bge_m3_*_group_embeddings.csv
 export/bge_m3_*_song_embeddings.csv
+export/*_parts/
+export/*_server.log
 
 # Environnement Python local
 .venv/
