@@ -1,0 +1,59 @@
+
+================================================================================
+                 RAP CORPUS - MORPHOSYNTACTIC ANALYSIS REPORT
+================================================================================
+
+Analysis date: 2026-09-16 01:22:28
+Run scope: full_10to4000w
+Songs analyzed: 84,155
+Lyric lines analyzed: 4,631,248
+Words analyzed: 48,318,712
+GPU: cuda:0 - NVIDIA H100 NVL
+Annotation time: 313.7 min
+Throughput: 2,567.5 words/s
+
+1. POS DISTRIBUTION
+-------------------
+ 1. NOUN       -  7,793,422 tokens ( 16.13%)
+ 2. PRON       -  7,552,619 tokens ( 15.63%)
+ 3. VERB       -  6,627,455 tokens ( 13.72%)
+ 4. DET        -  5,908,807 tokens ( 12.23%)
+ 5. PUNCT      -  4,625,373 tokens (  9.57%)
+ 6. ADP        -  4,454,756 tokens (  9.22%)
+ 7. ADV        -  2,575,149 tokens (  5.33%)
+ 8. AUX        -  1,759,821 tokens (  3.64%)
+ 9. ADJ        -  1,536,522 tokens (  3.18%)
+10. PROPN      -  1,407,971 tokens (  2.91%)
+11. X          -  1,265,600 tokens (  2.62%)
+12. SCONJ      -  1,089,319 tokens (  2.25%)
+13. CCONJ      -    855,570 tokens (  1.77%)
+14. INTJ       -    523,012 tokens (  1.08%)
+15. NUM        -    302,177 tokens (  0.63%)
+
+2. GENERATED FILES
+------------------
+
+Data:
+  - pos_full_10to4000w_conllu.csv: tokens, morphology, and syntactic dependencies
+  - stanza_gpu0_performance_full_10to4000w.csv: GPU performance metrics
+  - pos_distribution_all_full_10to4000w.csv: complete POS distribution
+  - main_pos_statistics_full_10to4000w.csv: main POS statistics
+
+Images:
+  - 02_pos_word_clouds_rank_full_10to4000w.png: six rank-weighted word clouds
+  - 02_wordcloud_rank_expressive_full_10to4000w.png: punctuation, symbols, and INTJ
+
+3. TECHNICAL NOTES
+------------------
+
+Model: Stanza French combined
+Processors: tokenize, mwt, pos, lemma, depparse
+Segmentation: one non-empty lyric line per syntactic sentence
+Progress: resumable batches with tqdm throughput and ETA
+Word clouds: strongly rank-weighted from 10% to 100% font scale
+Expressive category: PUNCT and SYM forms plus INTJ lemmas as an onomatopoeia proxy
+Bar charts: omitted
+
+================================================================================
+                            END OF REPORT
+================================================================================

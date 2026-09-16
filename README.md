@@ -1,4 +1,4 @@
-# ProjetRap — Analyse du corpus RapFr
+# ProjetRap - French Rap Corpus Analysis
 
 ## Contexte
 
@@ -7,11 +7,11 @@ Ce projet s'inscrit dans le cadre du cours d'application des méthodes de **data
 
 Ce cours mobilise également les ressources de l'[Institut ACSS-PSL](https://acss-dig.psl.eu/) (Applied Computational Social Sciences), dont l'auteur de ce projet est membre.
 
-Le corpus étudié (`RapFr.csv`) rassemble des textes de chansons de rap français ainsi qu'un ensemble de variables quantitatives et qualitatives associées (popularité, longueur des textes, tonalité, informations sur les artistes, etc.).
+The corpus (`corpus.csv`) gathers French rap lyrics together with quantitative and qualitative variables such as popularity, lyric length, sentiment, and artist metadata.
 
 ## Source des données
 
-`RapFr.csv` correspond au corpus **LRFAF** (37 307 chansons de rap français issues de genius.com, croisées avec Wikipédia/Wikidata), constitué par Benoît de Courson (regicid) :
+`corpus.csv` is derived from the **LRFAF** corpus of French rap songs collected from genius.com and enriched with Wikipedia/Wikidata information by Benoit de Courson (regicid):
 - Jeu de données : [huggingface.co/datasets/regicid/LRFAF](https://huggingface.co/datasets/regicid/LRFAF)
 - Article associé : Benoît de Courson, *« LRFAF : une exploration numérique du rap français depuis les années 1990 »* — [researchgate.net/publication/379061284](https://www.researchgate.net/publication/379061284_LRFAF_une_exploration_numerique_du_rap_francais_depuis_les_annees_1990)
 - Exploration interactive des fréquences lexicales du corpus : [Gallicagram, corpus « Rap »](https://shiny.ens-paris-saclay.fr/app/gallicagram)
@@ -20,28 +20,34 @@ Ce corpus est distribué pour un usage de recherche, sans licence formelle (les 
 
 ## Installation
 
-`RapFr.csv` (~114 Mo) dépasse la limite de 100 Mo par fichier de GitHub : il n'est donc **pas versionné** dans ce dépôt (voir `.gitignore`). Pour reconstituer le fichier avant d'exécuter les notebooks, télécharger le corpus depuis Hugging Face et le placer à la racine du dépôt sous le nom `RapFr.csv` :
+`corpus.csv` exceeds GitHub's 100 MB per-file limit and is therefore **not versioned**. Download the source corpus from Hugging Face before running the notebooks and place it at the repository root as `corpus.csv`:
 
 ```powershell
-Invoke-WebRequest -Uri "https://huggingface.co/datasets/regicid/LRFAF/resolve/main/corpus.csv?download=true" -OutFile "RapFr.csv"
+Invoke-WebRequest -Uri "https://huggingface.co/datasets/regicid/LRFAF/resolve/main/corpus.csv?download=true" -OutFile "corpus.csv"
 ```
 
-## État d'avancement
+## Current Analysis Pipeline
 
-Les notebooks livrés dans ce dépôt sont des **premiers jets**. Ils posent une structure d'analyse de base (chargement, description, distributions, évolution temporelle) mais ne sont pas définitifs.
+The repository contains a complete, GPU-ready pipeline:
 
-**Le travail demandé aux étudiants est de :**
-- affiner les scripts fournis (choix des variables clés, filtres, granularité temporelle, présentation des graphiques...) ;
-- surtout, **mettre en valeur des faits remarquables** repérés dans les données, en les commentant et en les interprétant.
+- `R00_corpus_analysis.ipynb`: corpus description and exploratory analysis;
+- `R01_pos_analysis.ipynb`: Stanza morphosyntactic annotation on GPU, including line-bounded dependency parsing and POS analysis;
+- `R02_bge_m3_embeddings.ipynb`: BGE-M3 GPU embeddings at lyric-group level and token-weighted whole-song level.
+
+The two GPU notebooks process lyrics containing 10 to 4,000 words inclusive. They use scoped resumable shards so that long runs can safely continue after an interruption.
 
 ## Organisation du dépôt
 
-- Les scripts et notebooks (`.py`, `.ipynb`) restent à la racine du dépôt.
-- `images/` : figures générées par les notebooks (graphiques exportés en `.png`).
-- `result/` : tables et CSV de résultats produits par les notebooks (résumés, agrégats).
+- Scripts and notebooks (`.py`, `.ipynb`) remain at the repository root.
+- `images/`: generated figures.
+- `export/`: tabular summaries, reports, manifests, and lightweight derived data.
+- Large raw data, CoNLL-U token exports, and resumable embedding shards remain local and are ignored by Git.
 
 Voir les skills [`notebook-authoring`](.github/skills/notebook-authoring/SKILL.md) et [`export-organization`](.github/skills/export-organization/SKILL.md) pour les conventions détaillées de rédaction des notebooks et d'organisation des exports.
 
 ## Notebooks
 
-- [`01_description_variables_quantitatives.ipynb`](01_description_variables_quantitatives.ipynb) : description des variables quantitatives du corpus (statistiques descriptives, distributions, évolution des moyennes annuelles).
+- [`01_description_variables_quantitatives.ipynb`](01_description_variables_quantitatives.ipynb): original quantitative-variable description.
+- [`R00_corpus_analysis.ipynb`](R00_corpus_analysis.ipynb): current corpus exploration.
+- [`R01_pos_analysis.ipynb`](R01_pos_analysis.ipynb): full-corpus POS and dependency analysis.
+- [`R02_bge_m3_embeddings.ipynb`](R02_bge_m3_embeddings.ipynb): hierarchical BGE-M3 lyric embeddings.

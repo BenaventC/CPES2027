@@ -1,0 +1,38 @@
+{
+  "model_name": "BAAI/bge-m3",
+  "run_label": "bge_m3_full_10to4000w",
+  "selection": {
+    "minimum_words": 10,
+    "maximum_words": 4000,
+    "sample_fraction": 1.0,
+    "random_state": 42
+  },
+  "grouping": {
+    "unit": "non-empty lyric lines",
+    "maximum_content_tokens": 1000,
+    "maximum_model_tokens": 1024,
+    "long_line_policy": "split only when one line exceeds the content-token limit"
+  },
+  "embeddings": {
+    "dtype": "float32",
+    "dimension": 1024,
+    "group_normalization": "L2",
+    "song_pooling": "token-count-weighted mean of normalized group embeddings",
+    "song_normalization": "L2 after pooling",
+    "ordering": "document_id ascending, then group_index ascending"
+  },
+  "counts": {
+    "documents": 84155,
+    "groups": 104225
+  },
+  "files": {
+    "group_embeddings_csv": "export/bge_m3_full_10to4000w_group_embeddings.csv",
+    "song_embeddings_csv": "export/bge_m3_full_10to4000w_song_embeddings.csv",
+    "performance": "export/bge_m3_full_10to4000w_performance.csv"
+  },
+  "retained_deliverables": {
+    "embedding_format": "CSV with metadata columns followed by embedding_0000 to embedding_1023",
+    "group_rows": 104225,
+    "song_rows": 84155
+  }
+}

@@ -1,0 +1,2 @@
+model_name,gpu_index,gpu_name,run_label,documents,groups,embedding_dimension,max_sequence_tokens,embedding_batch_size,embedding_seconds,documents_per_second,groups_per_second,peak_gpu_memory_gib
+BAAI/bge-m3,0,NVIDIA H100 NVL,bge_m3_full_10to4000w,84155,104225,1024,1024,32,1782.8068909049034,47.203654209169706,58.461183054491265,3.739112377166748

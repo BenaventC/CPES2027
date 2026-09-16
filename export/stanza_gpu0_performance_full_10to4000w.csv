@@ -1,0 +1,2 @@
+gpu_index,gpu_name,sample_fraction,sample_documents,lyric_lines,sentences,words,elapsed_seconds,documents_per_second,lines_per_second,sentences_per_second,words_per_second,peak_gpu_memory_gib,estimated_full_minutes
+0,NVIDIA H100 NVL,1.0,84155,4631248,4631248,48318712,18819.09781223908,4.471787162149156,246.09298735819567,246.09298735819567,2567.5360467373584,16.897735595703125,313.65163020398467

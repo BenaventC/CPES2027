@@ -1,5 +1,14 @@
-# Corpus brut trop volumineux pour GitHub (>100 Mo) — voir README pour le retélécharger
+# Raw corpus and large resumable annotation or embedding artifacts are kept
+# locally and regenerated from the notebooks.
+corpus.csv
 RapFr.csv
+export/.pos_*_parts/
+export/pos_*_conllu.csv
+export/.bge_m3_*_parts/
+export/bge_m3_*_group_embeddings.npy
+export/bge_m3_*_song_embeddings.npy
+export/bge_m3_*_group_embeddings.csv
+export/bge_m3_*_song_embeddings.csv
 
 # Environnement Python local
 .venv/
