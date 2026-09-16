@@ -33,10 +33,6 @@ The repository contains a GPU-ready analysis pipeline:
 
 R04 starts with a manual 1% pilot on GPU 2. It detects currencies and common or slang terms for money, then produces JSON/CSV counts, an 80-term word cloud, an 80-term UMAP projection, cooccurrence data, and yearly lexical density for 1990-2024.
 
-![Six POS word clouds](images/02_pos_word_clouds_rank_full_10to4000w.png)
-
-Six rank-weighted word clouds by linguistic category from the POS analysis.
-
 ## Repository Organisation
 
 - Scripts and notebooks (`.py`, `.ipynb`) remain at the repository root.
