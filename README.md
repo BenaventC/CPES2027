@@ -30,8 +30,86 @@ The repository contains a GPU-ready analysis pipeline:
 - [`R02_bge_m3_embeddings.ipynb`](R02_bge_m3_embeddings.ipynb): BGE-M3 lyric embeddings;
 - [`R03_toxicity_vllm_gemma_clean.ipynb`](R03_toxicity_vllm_gemma_clean.ipynb): toxicity scores from 0 to 10 for four dimensions;
 - [`R04_money_extraction_mistral_gpu2.ipynb`](R04_money_extraction_mistral_gpu2.ipynb): extraction and counting of monetary entities and expressions.
+- [`R05_political_references_mistral.ipynb`](R05_political_references_mistral.ipynb) and [`R05_political_references_mistral_job.py`](R05_political_references_mistral_job.py): extraction of political figures, parties, slogans, events, and institutions with Mistral 7B.
 
 R04 starts with a manual 1% pilot on GPU 2. It detects currencies and common or slang terms for money, then produces JSON/CSV counts, an 80-term word cloud, an 80-term UMAP projection, cooccurrence data, and yearly lexical density for 1990-2024.
+
+## R05 — Références politiques dans les chansons
+
+### Organisation et lancement
+
+Le [notebook R05](R05_political_references_mistral.ipynb) pilote l'analyse et présente les tableaux. Le [script partagé](R05_political_references_mistral_job.py) contient le prompt, la validation, les appels au modèle, les exports et le rapprochement sémantique : ces traitements ne sont pas dupliqués dans le notebook.
+
+- Modèle d'annotation : `mistralai/Mistral-7B-Instruct-v0.3`, via un serveur vLLM local, avec `temperature=0`.
+- Échantillon par défaut : **200 chansons**, graine **42**, après filtrage à **10–4 000 mots**.
+- Cinq types : `figure_politique`, `parti_politique`, `slogan`, `evenement_politique`, `institution`.
+- Le notebook inspecte les GPU avant de démarrer le serveur sur un seul GPU disponible, au port **8015**. Un serveur existant peut être réutilisé après vérification du modèle ; sa disponibilité ne garantit pas à elle seule son placement GPU.
+- Les chemins sont relatifs au dossier du projet : ouvrir le notebook avec ce dossier comme répertoire de travail.
+
+Le script en ligne de commande suppose que le serveur vLLM est **déjà démarré** :
+
+```bash
+python R05_political_references_mistral_job.py \
+  --input corpus.csv --output-dir export \
+  --mode test --sample-size 200 --random-state 42 \
+  --base-url http://127.0.0.1:8015
+```
+
+`--mode pilot --pilot-fraction 0.01` sélectionne 1 % du corpus filtré ; `--mode full` sélectionne tout le corpus filtré. Ces modes ne doivent être utilisés qu'après examen qualitatif du petit échantillon. Le CLI exécute l'annotation et ses exports ; le rapprochement et les tableaux sont exécutés par les sections 5.2 et 6 du notebook.
+
+L'annotation nécessite `pandas`, `requests` et `tqdm`. Le rapprochement nécessite aussi `numpy`, un couple **PyTorch/Transformers compatible**, et le modèle **`BAAI/bge-m3` déjà en cache local**. Il utilise le CPU pour ne pas concurrencer Mistral sur GPU. L'environnement local `vllm_mistral` a été validé ; les chemins de lancement du serveur dans le notebook sont à adapter sur une autre machine.
+
+### Colonnes et rapprochement sémantique
+
+| Colonne | Origine et signification |
+|---|---|
+| `mention` | Texte de la mention extrait par Mistral et vérifié dans les paroles. |
+| `reference` | Nom proposé par Mistral, conservé sans modification par notre rapprochement. |
+| `extrait` | Justification textuelle proposée par Mistral et vérifiée dans les paroles. |
+| `reference_canon` | Nom construit par notre processus de rapprochement des références. |
+| `annotation_status`, `annotation_error` | Statut et diagnostic par chanson dans le JSON ; un échec n'est pas une absence de référence. |
+
+La section **5.2** calcule des embeddings BGE-M3 des références distinctes. Les rapprochements restent séparés par type, avec une similarité cosinus d'au moins **0,85** et un écart d'au moins **0,03** entre les deux meilleurs candidats. Ils utilisent des représentants directs, sans fusion transitive. Des garde-fous sur les noms évitent de confondre des prénoms différents et corrigent prudemment certaines coquilles. Les noms préférés sont modifiables, avec `Emmanuel Macron` comme exemple.
+
+Le cas `Macron` / `emmanuel Macron` / `Président Marcon` a été testé : il devient `Emmanuel Macron`. Les contrôles conservent Brigitte Macron, François Hollande, Marine et Jean-Marie Le Pen séparément, et ne résolvent pas automatiquement le nom ambigu `Le Pen`. **Une proximité sémantique n'est pas une preuve d'identité** : examiner les correspondances, les textes corrigés et les scores exportés.
+
+### Statistiques et exports
+
+La section **6** calcule les effectifs et parts par type ainsi que le nombre et la proportion de chansons concernées. La section **6.1** regroupe par `type` et `reference_canon`. Les dénominateurs de prévalence excluent les annotations en échec. Une chanson compte au plus une fois par groupe ; un effectif de références compte les éléments extraits, pas les répétitions des mots dans les paroles.
+
+Les tableaux de fréquences n'affichent que les effectifs **strictement supérieurs à 1**. Les aperçus des CSV canoniques, des correspondances et des fréquences sont limités aux **10 premières lignes**. Les CSV exportés et les dénominateurs des pourcentages restent complets.
+
+Tous les fichiers sont écrits dans `export/`, sous le préfixe `R05_political_references_<label>` ; par exemple `200songs_10to4000w` :
+
+| Suffixe | Contenu |
+|---|---|
+| `.json` | Une ligne logique par chanson, références, statut et erreur éventuelle. |
+| `.csv` | Une ligne par référence extraite, avec métadonnées de la chanson. |
+| `_errors.csv` | Diagnostics des annotations en échec. |
+| `_performance.csv` | Durée client, chansons/s, succès, échecs et effectif des références. |
+| `_canonical.csv` | Tableau enrichi avec `reference_canon`, sans modifier les colonnes brutes. |
+| `_canonical_mapping.csv` | Correspondances source/canonique, similarités et décisions. |
+| `_canonical_performance.csv` | Paramètres et performance du rapprochement sur CPU. |
+| `_type_frequencies.csv` | Fréquences par type. |
+| `_type_reference_frequencies.csv` | Fréquences par type et référence canonique. |
+
+Les métriques d'annotation mesurent le **temps mural côté client**, pas le temps des kernels CUDA ni le pic de mémoire GPU. Les fichiers portent le label de l'échantillon pour séparer les tailles ; relancer le même label réécrit ses exports.
+
+### Validation et limites
+
+Le dernier essai local sur **200 chansons** a terminé avec **181 annotations réussies**, **19 échecs de validation** et **303 références extraites** ; l'annotation a pris environ **311 secondes**. Ces chiffres décrivent cet essai, pas une garantie de qualité sémantique ou de reproductibilité exacte des sorties du modèle.
+
+Des faux positifs restent présents, notamment `Michael Jackson` classé comme figure politique et `Année` comme événement. Le rapprochement canonique ne corrige pas les erreurs de classification. Une revue manuelle et un ajustement du prompt sont nécessaires avant un passage à grande échelle.
+
+Les réponses tronquées sont rejetées ; une connexion refusée au serveur arrête le traitement plutôt que de transformer toutes les chansons suivantes en échecs. **Il n'y a pas encore de sauvegarde intermédiaire ni de reprise** : un arrêt avant l'export final perd les résultats en mémoire. Les résultats partiels ne sont pas présentés comme complets.
+
+Les tests de régression couvrent le parsing, les preuves textuelles, la perte du serveur, les réponses tronquées, les exports et l'échantillonnage. Depuis le dossier du projet :
+
+```bash
+python -m unittest discover -s . -p 'test_R05_political_references.py' -v
+```
+
+Les sorties du pilote, les journaux et les données restent locaux ; le notebook publié est fourni sans sorties d'exécution.
 
 ## Repository Organisation
 
@@ -51,3 +129,4 @@ See [`notebook-authoring`](.github/skills/notebook-authoring/SKILL.md), [`export
 - [`R02_bge_m3_embeddings.ipynb`](R02_bge_m3_embeddings.ipynb): hierarchical BGE-M3 embeddings.
 - [`R03_toxicity_vllm_gemma_clean.ipynb`](R03_toxicity_vllm_gemma_clean.ipynb): toxicity measurement with vLLM.
 - [`R04_money_extraction_mistral_gpu2.ipynb`](R04_money_extraction_mistral_gpu2.ipynb): monetary-entity extraction with Mistral.
+- [`R05_political_references_mistral.ipynb`](R05_political_references_mistral.ipynb): political-reference annotation with Mistral and a deterministic pilot-first workflow.
