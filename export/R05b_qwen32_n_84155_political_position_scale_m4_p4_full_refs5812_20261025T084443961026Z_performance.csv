@@ -1,0 +1,2 @@
+mode,target_count,elapsed_seconds,references_per_second,concurrency,scored_count,valid_null_count,failed_count,model,endpoint,score_min,score_max,prompt_sha256,target_sha256,timing_scope
+full,5812,272.71994389314204,21.311239350640506,4,1185,4627,0,Qwen/Qwen3-32B,http://127.0.0.1:8016,-4,4,d969f769f232e01e39e8963a72b2ba4b0f9c172153a81f8cf7747020cd0a433f,30d20c059bdd5d6ab2bf213e593d874887d00ff9f3d68542086cab0f1f6fd893,client_wall_time_not_gpu_kernel_time
