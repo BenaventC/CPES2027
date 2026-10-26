@@ -1,0 +1,2 @@
+perimetre,modele,empreinte,selection,reprises,traitees_session,reussites,erreurs,secondes_session_client,chansons_s_session,concurrence,max_tokens
+test200,Qwen/Qwen3-32B,f76947965f79366ec221301f923707a7887df3ba24daef7f9e5ec14b3fa97a2d,200,0,200,200,0,70.30244730226696,2.8448511776566683,8,512
