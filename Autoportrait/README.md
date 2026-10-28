@@ -268,6 +268,8 @@ Sorties :
 
 - `data/results/autoportrait2_qwen_description_{n}.csv` : listes jointes par `|`,
   `aspect_principal`, indicatrices `aspect_*` et `demarcation_*`.
+- `data/results/autoportrait2_qwen_description_{n}b.csv` : version « b », annotations seules (lignes `ok`,
+  sans raisonnement, statut ni colonnes techniques ; 30 colonnes). C'est le fichier des statistiques.
 - `data/results/autoportrait2_qwen_description_{n}.json`, `_erreurs.csv` et `_distributions.csv` (synthèse).
 - Le journal de reprise `autoportrait2_qwen32_reason_{perimetre}_n{n}_{empreinte}.jsonl`.
 - `data/performance/perfGPU_autoportrait2.csv` : performances cumulées,
@@ -275,3 +277,15 @@ Sorties :
 
 Premier essai réel : 10 autoportraits tirés du lot 1024, 10 descriptions valides.
 L'essai a tourné à environ 0,33 chanson/s, en partageant les serveurs avec la campagne de phase 1 alors en cours.
+
+Les étapes 5 et 6 lisent la version « b » `data/results/autoportrait2_qwen_description_{n_analyse}b.csv` (`n_analyse = 8861` dans la première cellule, valeur par défaut si la configuration n'a pas tourné). L'étape 5 est autonome ; l'étape 6 demande seulement l'étape 5 : ni annotation ni synthèse à relancer.
+
+Étape 5 du carnet, statistiques des aspects : une figure en barres horizontales montre, pour chaque aspect, la part des chansons qui le citent (orange) et la part où il est l'aspect principal (cramoisi), dans la palette hip-hop du dépôt sur fond clair, ainsi que la répartition du nombre d'aspects par chanson. Exports :
+
+- `data/results/autoportrait2_qwen_description_{n}_aspects.csv` ;
+- `images/autoportrait2_aspects_{n}.png`.
+
+Étape 6 du carnet, évolution des aspects : douze panneaux, un par aspect, montrent la part annuelle des autoportraits qui citent l'aspect (points), sa moyenne mobile centrée sur 5 ans (`fenetre_lissage`) et celle de l'aspect principal. Le lissage cumule les effectifs de la fenêtre au lieu de moyenner les pourcentages. Un tableau compare les périodes 1990–2003, 2004–2013 et 2014–2024. Exports :
+
+- `data/results/autoportrait2_qwen_description_{n}_aspects_par_annee.csv` ;
+- `images/autoportrait2_aspects_evolution_{n}.png`.
