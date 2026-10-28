@@ -15,6 +15,9 @@ export/*
 
 # Generated figures follow the same policy: retain full-corpus and R00 figures.
 images/*
+!images/R05_political_references_pipeline.svg
+!images/R05b_political_references_pipeline.svg
+!images/R05b14b_political_references_pipeline.svg
 !images/*full*
 !images/*_full_*
 !images/R00_*
@@ -32,6 +35,7 @@ export/*_server.log
 
 # Environnement Python local
 .venv/
+.venv-r05b/
 __pycache__/
 *.pyc
 
