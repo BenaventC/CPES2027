@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 *.lock
+
+# Corpus d'étude stratifié : contient les paroles, régénéré par le carnet (étape 2).
+data/results/corpus_etude_stratifie.csv

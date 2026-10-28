@@ -1,0 +1,101 @@
+{
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "outils",
+  "noms",
+  "comparaisons"
+ ],
+ "properties": {
+  "outils": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "categorie",
+     "mention",
+     "arme",
+     "extrait"
+    ],
+    "properties": {
+     "categorie": {
+      "type": "string",
+      "enum": [
+       "ecrit",
+       "oral"
+      ]
+     },
+     "mention": {
+      "type": "string"
+     },
+     "arme": {
+      "type": "boolean"
+     },
+     "extrait": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "noms": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "type",
+     "mention",
+     "extrait"
+    ],
+    "properties": {
+     "type": {
+      "type": "string",
+      "enum": [
+       "nom_de_scene",
+       "alias",
+       "prenom_civil"
+      ]
+     },
+     "mention": {
+      "type": "string"
+     },
+     "extrait": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "comparaisons": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "mention",
+     "reference",
+     "sens",
+     "extrait"
+    ],
+    "properties": {
+     "mention": {
+      "type": "string"
+     },
+     "reference": {
+      "type": "string"
+     },
+     "sens": {
+      "type": "string",
+      "enum": [
+       "modele",
+       "contre_modele"
+      ]
+     },
+     "extrait": {
+      "type": "string"
+     }
+    }
+   }
+  }
+ }
+}

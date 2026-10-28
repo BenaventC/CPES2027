@@ -1,0 +1,81 @@
+{
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "justification",
+  "registre",
+  "aspects",
+  "temporalite",
+  "demarcation",
+  "regard_des_autres"
+ ],
+ "properties": {
+  "justification": {
+   "type": "string"
+  },
+  "registre": {
+   "type": "string",
+   "enum": [
+    "egotrip",
+    "introspection",
+    "manifeste",
+    "mixte"
+   ]
+  },
+  "aspects": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "enum": [
+     "origines",
+     "argent_reussite",
+     "rue_illegalite",
+     "talent_art",
+     "corps_apparence",
+     "caractere_valeurs",
+     "failles_emotions",
+     "foi_destin",
+     "proches",
+     "seduction_sexualite",
+     "ambitions",
+     "identite_collective"
+    ]
+   },
+   "minItems": 1,
+   "maxItems": 4,
+   "uniqueItems": true
+  },
+  "temporalite": {
+   "type": "string",
+   "enum": [
+    "present",
+    "passe",
+    "trajectoire",
+    "avenir"
+   ]
+  },
+  "demarcation": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "enum": [
+     "rappeurs_concurrents",
+     "ennemis_traitres",
+     "police_justice",
+     "etat_politique",
+     "societe_normes",
+     "industrie_medias",
+     "autre"
+    ]
+   },
+   "uniqueItems": true
+  },
+  "regard_des_autres": {
+   "type": "string",
+   "enum": [
+    "oui",
+    "non"
+   ]
+  }
+ }
+}
