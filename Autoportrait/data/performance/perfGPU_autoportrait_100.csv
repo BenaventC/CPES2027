@@ -1,0 +1,2 @@
+perimetre,modele,empreinte,selection,reprises,traitees_session,reussites,erreurs,secondes_session_client,chansons_s_session,secondes_par_chanson_session,date_utc,type_execution,nombre_serveurs,concurrence,concurrence_par_serveur,serveurs,taille_lot,max_tokens,enable_thinking,raisonnements_non_vides
+echantillon,Qwen/Qwen3-32B,3d72d7fd4d768c0f4969c013c4bd505877878dbc75ee59311752be872d700bb6,100,0,100,100,0,114.84784046187997,0.8707172864359759,1.1484784046187997,,calcul,2,16,8,"[""http://127.0.0.1:8016/v1"", ""http://127.0.0.1:8017/v1""]",128,8192,True,100
