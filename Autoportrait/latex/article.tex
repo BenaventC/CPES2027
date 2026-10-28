@@ -1,0 +1,400 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english,french]{babel}
+\usepackage{lmodern,microtype}
+\usepackage[margin=1.8cm]{geometry}
+\usepackage{graphicx,booktabs,amsmath,xcolor}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[colorlinks=true,urlcolor=teal,linkcolor=black]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[authoryear,round]{natbib}
+\selectlanguage{french}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small L'autoportrait dans le rap français}
+\fancyhead[R]{\small CPES DAC \textperiodcentered{} 2026--2027}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\emergencystretch}{2em}
+\newcommand{\pct}{\,\%}
+\newcommand{\rubrique}[1]{\par\medskip\textbf{#1}\par}
+\hypersetup{pdftitle={L'autoportrait dans le rap français},
+ pdfauthor={Agathe Salmon, Nathan Tessot, Marius Zarka et Christophe Benavent}}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+{\LARGE\bfseries L'autoportrait dans le rap français\footnotemark\par}
+\vspace{3pt}
+{\large Aspects et transformations de l'autoportrait, 1990--2024\par}
+\vspace{9pt}
+{\large Agathe Salmon \quad Nathan Tessot \quad Marius Zarka\par}
+\vspace{5pt}
+{\small CPES Sciences des données, arts et cultures (DAC)\\
+\href{https://psl.eu/formation/cpes-psl-louis-le-grand}{Université PSL et lycée Louis-le-Grand}\\
+Année universitaire 2026--2027\par}
+\vspace{5pt}
+{\large \href{https://www.linkedin.com/in/christophebenavent/}{Christophe Benavent}\par}
+{\small Université Paris Dauphine--PSL --- Dauphine Recherches en Management (DRM)\par}
+\vspace{5pt}
+{\small Étude exploratoire \textperiodcentered{} Résultats exportés le 28 octobre 2026}
+\end{center}
+\footnotetext{Les auteurs remercient ACSS-PSL pour la mise à disposition
+des ressources de calcul et pour l'assistance en ingénierie apportée à ce projet.}
+
+\rubrique{Résumé}
+Comment les chansons de rap français composent-elles une image de soi, et
+comment les dimensions de cette image évoluent-elles entre 1990 et 2024 ?
+Nous étudions un corpus stratifié de 12\,938 chansons à l'aide d'une annotation
+en deux étapes par Qwen3-32B : identification des autoportraits, puis description
+ordonnée de leurs aspects. Les deux graphiques analysés portent sur 8\,856
+descriptions valides. Le talent artistique (59,8\pct), les origines (57,6\pct)
+et le caractère ou les valeurs (57,6\pct) sont les aspects les plus fréquemment
+retenus. L'argent et la réussite ainsi que les failles et émotions occupent
+une place plus forte dans les périodes récentes ; l'identité collective
+recule. Ces résultats décrivent les annotations du corpus étudié, non une
+évolution causale du genre. Leur portée reste limitée par l'échantillonnage,
+l'absence de validation humaine mesurée et la fréquente saturation du nombre
+d'aspects autorisé.
+
+\textbf{Mots-clés :} rap français ; autoportrait ; humanités numériques ;
+annotation automatique ; Qwen3 ; analyse diachronique.
+
+\begin{otherlanguage}{english}
+\rubrique{Abstract}
+How do French rap songs construct a self-image, and how do its dimensions
+change between 1990 and 2024? We examine a year-stratified corpus of 12,938
+songs using a two-stage Qwen3-32B annotation workflow: self-portrait detection,
+followed by ranked aspect description. The two charts cover 8,856 valid
+descriptions. Artistic talent (59.8\%), origins (57.6\%), and character or
+values (57.6\%) are the most frequently assigned aspects. Money and success,
+as well as vulnerabilities and emotions, are more prominent in recent
+periods, while collective identity declines. These are descriptive patterns
+in model annotations, not causal findings about the genre. Sampling,
+unmeasured human agreement, and frequent saturation of the aspect limit
+restrict their interpretation.
+
+\textbf{Keywords:} French rap; self-portrait; digital humanities; automatic
+annotation; Qwen3; diachronic analysis.
+\end{otherlanguage}
+
+\section{Question de recherche}
+L'autoportrait ne se réduit ni au pronom \og je \fg{} ni à l'autobiographie :
+le locuteur assemble les traits de sa propre image plutôt qu'il ne raconte
+des événements. Egotrip, confession et revendication de valeurs peuvent
+relever de ce même geste.
+
+\textbf{Question centrale : quelles dimensions structurent l'autoportrait
+dans les chansons du corpus, lesquelles en constituent le centre, et comment
+leurs fréquences évoluent-elles de 1990 à 2024 ?} Nous distinguons présence
+et premier rang des aspects. L'analyse porte sur l'image énoncée, non sur
+la biographie ou la sincérité des artistes.
+
+\newpage
+\section{Corpus et chaîne de traitement}
+\textbf{Ancrage théorique.}
+L'étude de \citet{bethune2011}, \emph{Sur les traces du rap},
+constitue la référence principale du projet. Elle inspire le codage des
+facettes de l'autoportrait et la conception des prompts des deux étapes
+d'annotation. La grille de douze aspects et les règles de décision sont
+une opérationnalisation propre à cette étude, et non une grille reproduite
+à l'identique depuis l'article.
+
+\subsection{Un échantillonnage stratifié par année}
+La base locale fournit 84\,821 chansons aux paroles exploitables après
+nettoyage. Le corpus d'étude comprend toutes les 2\,438 chansons datées
+d'avant 2004, puis 500 chansons par année de 2004 à 2024, tirées sans remise
+avec la graine $42+\text{année}$, soit 10\,500 titres supplémentaires.
+Les dates absentes, 1905 (valeur aberrante) et 2025 (année incomplète) sont
+écartées. Les 12\,938 chansons couvrent ainsi 35 années. Cette construction
+favorise la comparaison annuelle mais ne reproduit pas la distribution
+chronologique de la base.
+
+\begin{center}
+\includegraphics[width=.95\linewidth,height=6.7cm,keepaspectratio]{pipeline.pdf}
+\captionof{figure}{Chaîne de traitement. Diagramme produit localement à partir
+de la source Mermaid \texttt{pipeline.mmd}. Les erreurs techniques restent
+distinctes des décisions interprétatives.}
+\label{fig:pipeline}
+\end{center}
+
+\subsection{Deux étapes d'annotation, un même modèle}
+La première étape applique les catégories \texttt{autoportrait},
+\texttt{pas\_autoportrait} et \texttt{je\_ne\_sais\_pas}. Les exports comptent
+respectivement 8\,861, 3\,887 et 183 décisions, plus 7 erreurs techniques.
+Les autoportraits représentent 68,5\pct{} des chansons sélectionnées :
+c'est une proportion brute de l'échantillon, non une estimation pondérée de
+l'ensemble du rap français. La seconde étape ne traite que les 8\,861
+autoportraits : 8\,856 descriptions sont exploitables et 5 sont en erreur.
+Le suffixe \texttt{8861} des fichiers désigne donc le lot soumis,
+\emph{pas} le dénominateur des graphiques.
+
+Les notebooks utilisent \texttt{Qwen/Qwen3-32B}, servi localement par deux
+instances vLLM indépendantes, une par GPU. Le raisonnement est activé ; la
+température vaut 0 et le budget de sortie 8\,192 jetons, raisonnement compris.
+Douze requêtes par serveur, soit 24 au total, sont distribuées par une file
+de créneaux ; les lots de 128 limitent les tâches soumises. Les journaux
+permettent une reprise et le client valide le JSON, les catégories et
+l'unicité des listes. Ces contrôles garantissent une structure exploitable,
+pas la justesse sémantique de l'annotation.
+
+\subsection{Environnement technique et assistance au développement}
+Le traitement s'appuie sur le \textbf{cluster ACSS-PSL} et ses ressources GPU.
+La pile comprend \textbf{Python et les notebooks Jupyter}, pandas pour les
+tableaux, Matplotlib pour les graphiques et tqdm pour le suivi des traitements.
+\textbf{vLLM} expose une API compatible OpenAI pour l'inférence locale de
+\textbf{Qwen3-32B} ; cette compatibilité ne signifie pas que les paroles sont
+envoyées à un service OpenAI. Les échanges et exports reposent sur JSON,
+JSONL et CSV.
+
+\textbf{Claude et GitHub Copilot} ont été mobilisés comme assistants dans
+l'élaboration du projet et le travail de développement. Ils doivent être
+distingués du modèle d'annotation : les décisions analysées ici proviennent
+de Qwen3-32B, et non d'un vote entre ces outils. Leur intervention ne constitue
+pas une validation indépendante des catégories. Le versionnement repose sur
+\textbf{Git et GitHub} ; le présent article utilise \textbf{LaTeX et BibTeX},
+un diagramme \textbf{Mermaid} et une compilation par \textbf{Tectonic}.
+Les versions exactes des assistants, des bibliothèques et du matériel de la
+campagne ne sont pas établies ici ; elles ne sont donc pas déduites de
+l'environnement actuel.
+
+\subsection{Consignes : de la définition au codage des facettes}
+Dans le prolongement de \citet{bethune2011}, les prompts traduisent
+l'inspiration théorique en décisions explicites, sans attribuer à cet
+article la grille exacte construite pour le projet.
+
+\textbf{Phase 1 : reconnaître le geste d'autoportrait.}
+La consigne articule deux conditions : le locuteur est le sujet du texte
+(\textsc{auto}) et il compose son image plutôt qu'il ne déroule un récit
+(\textsc{portrait}). Ni le pronom \og je \fg{}, ni la sincérité supposée,
+ni le ton ne suffisent à décider. Le prompt distingue les portraits d'autrui,
+les récits, les adresses et les ambiances ; il explicite les cas limites
+(parcours de vie, engagement, amour, rivalités, collectif). La réponse doit
+contenir une justification sans citation des paroles et l'une des trois
+étiquettes, dont une indécision réservée aux cas réellement partagés.
+
+\textbf{Phase 2 : décrire et hiérarchiser les facettes.}
+La consigne décrit le registre (egotrip, introspection, manifeste, mixte),
+un à quatre aspects ordonnés parmi douze, la temporalité, les figures de
+démarcation et le regard explicite d'autrui. Dans sa version actuelle,
+un aspect secondaire doit occuper au moins un couplet, le refrain ou environ
+un quart du texte ; le quatrième doit rester exceptionnel.
+La démarcation n'est pas assimilée au regard d'autrui : ce dernier exige
+un jugement rapporté qui vise le locuteur.
+
+Les deux prompts imposent de juger la chanson entière, de ne compter un
+refrain répété qu'une fois et d'ignorer les connaissances externes sur
+l'artiste. La réponse finale est un objet JSON à champs imposés.
+Les annexes~\ref{ann:phase1} et~\ref{ann:phase2} reproduisent intégralement
+les consignes textuelles actuellement présentes dans le dépôt, et non les
+paroles soumises, les schémas JSON ou l'enveloppe technique des requêtes.
+Faute de vérification des empreintes historiques, elles ne certifient pas
+la version exacte utilisée pour produire les résultats présentés.
+
+\subsection{Aspects et indicateurs}
+La description comprend le registre, la temporalité, les démarcations, le
+regard d'autrui et une liste ordonnée de un à quatre aspects parmi douze.
+Nous analysons seulement cette dernière liste. Un aspect est dit
+\emph{cité} s'il y figure ; il est \emph{principal} s'il arrive en tête.
+\og Cité \fg{} désigne ici une catégorie attribuée par le modèle, pas le comptage
+d'un mot ni une citation littérale. Plusieurs aspects pouvant être retenus,
+les pourcentages de présence ne s'additionnent pas à 100\pct.
+
+\newpage
+\section{Résultat 1 : les composantes de l'image de soi}
+\begin{center}
+\includegraphics[width=\linewidth]{../images/autoportrait2_aspects_8861.png}
+\captionof{figure}{Aspects cités et principaux dans les 8\,856 descriptions
+valides ; à droite, nombre d'aspects retenus par chanson. Figure originale
+du notebook, conservée sans modification.}
+\label{fig:aspects}
+\end{center}
+
+\rubrique{Le talent et les origines structurent le premier plan}
+Le talent et l'art sont retenus dans 5\,292 chansons (59,8\pct) et occupent la
+première place dans 2\,518 (28,4\pct). Les origines apparaissent dans 5\,099
+descriptions (57,6\pct) et sont principales dans 2\,320 (26,2\pct).
+Ces deux dimensions réunissent ainsi 54,6\pct{} des premiers rangs.
+Se présenter comme artiste et situer d'où l'on vient sont donc les deux
+ancrages dominants du classement produit par le modèle.
+
+\rubrique{Être présent n'est pas organiser le portrait}
+Le caractère et les valeurs sont presque aussi fréquents que les origines
+(5\,097 chansons, 57,6\pct), mais ne sont principaux que dans 332 cas
+(3,7\pct). Ils fonctionnent davantage, dans ces annotations, comme une
+dimension d'accompagnement. L'argent et la réussite, cités dans 50,5\pct{}
+des descriptions, sont principaux dans 16,6\pct{} des cas. Les failles et
+émotions (34,2\pct{} de présence) arrivent en tête dans 10,6\pct{} des chansons,
+contre 5,8\pct{} pour la rue et l'illégalité, pourtant citées à une fréquence
+voisine (34,4\pct). Le contraste distingue la diffusion d'un thème de sa
+centralité dans le portrait.
+
+Les dimensions proches, ambitions, corps, foi et séduction sont moins
+fréquemment retenues. Ce rang ne prouve pas qu'elles soient rares dans les
+paroles : elles peuvent apparaître sans devenir une composante majeure de
+l'image de soi, ou être évincées par le plafond de quatre catégories.
+
+\rubrique{Un résultat qui oblige à interroger l'instrument}
+Les listes comprennent un aspect dans 122 cas (1,4\pct), deux dans 1\,108
+(12,5\pct), trois dans 1\,632 (18,4\pct) et quatre dans 5\,994 (67,7\pct),
+soit 3,52 aspects en moyenne. Cette saturation est un résultat méthodologique
+majeur. La consigne actuellement présente dans le dépôt demande de ne
+retenir un aspect secondaire que s'il occupe un couplet, le refrain ou environ
+un quart du texte, et de rendre le quatrième exceptionnel. Les exports ne
+permettent pas d'affirmer que cette version précise a servi à la campagne.
+L'écart appelle donc un audit de provenance et une lecture humaine avant
+d'interpréter cette multiplicité comme une propriété des chansons.
+
+\newpage
+\section{Résultat 2 : des recompositions chronologiques}
+\begin{center}
+\includegraphics[width=\linewidth]{../images/autoportrait2_aspects_evolution_8861.png}
+\captionof{figure}{Évolution annuelle par aspect : points bruts, présence
+lissée et premier rang lissé. Moyenne mobile centrée sur cinq ans,
+pondérée par les effectifs. Les échelles verticales diffèrent entre panneaux ;
+le repère 2004 indique le changement de plan d'échantillonnage.}
+\label{fig:evolution}
+\end{center}
+\vspace{-4pt}
+\begin{center}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Aspect cité (\%) & 1990--2003 & 2004--2013 & 2014--2024 & Écart (points)\\
+\midrule
+Argent, réussite & 32,8 & 41,7 & 63,1 & +30,3\\
+Failles, émotions & 24,7 & 30,7 & 40,0 & +15,3\\
+Talent, art & 63,5 & 64,2 & 55,1 & $-8,4$\\
+Origines & 62,7 & 64,0 & 50,9 & $-11,8$\\
+Caractère, valeurs & 65,3 & 60,8 & 52,5 & $-12,8$\\
+Identité collective & 31,9 & 27,7 & 13,9 & $-18,0$\\
+\bottomrule
+\end{tabular}
+\captionof{table}{Parts non lissées par période, recalculées en cumulant les
+effectifs annuels. Dénominateurs : 1\,395, 3\,250 et 4\,211 descriptions.
+Écart entre la dernière et la première période, sur les valeurs affichées.}
+\label{tab:periodes}
+\end{center}
+
+La montée de l'argent et de la réussite est la transformation la plus nette
+parmi ces indicateurs. Elle accompagne, plutôt qu'elle n'exclut, une place
+croissante des failles et émotions. Le graphe suggère donc une
+\emph{coexistence} accrue de la réussite et de la vulnérabilité à l'échelle
+des périodes ; il ne démontre pas qu'elles coexistent dans les mêmes chansons.
+Le talent et les origines restent fréquents mais reculent dans la période
+récente, tandis que l'identité collective diminue fortement.
+
+Les trajectoires ne sont pas toutes monotones : la rue et l'illégalité
+oscillent, les proches restent relativement stables et les ambitions
+évoluent peu. Il ne s'agit pas d'un remplacement uniforme du collectif par
+l'individuel. Aucun test de significativité ni modèle contrôlant les artistes
+n'est mobilisé : les écarts sont descriptifs.
+
+\newpage
+\section{Discussion, limites et reproductibilité}
+\subsection{Ce que les deux figures permettent de soutenir}
+Le rapprochement des figures invite à distinguer un socle durable et des
+recompositions. L'art et les origines dominent globalement les premiers rangs,
+mais leur présence relative est moins forte en fin de période. À l'inverse,
+la réussite et la vulnérabilité gagnent en visibilité. L'hypothèse
+interprétative est celle d'un élargissement des manières de se présenter,
+plutôt que d'une opposition simple entre vantardise et introspection.
+Cette hypothèse doit être confrontée aux textes : les graphiques ne
+mesurent ni les intentions des artistes, ni la réception des publics.
+
+\subsection{Quatre précautions indispensables}
+\textbf{Sélection et dénominateurs.}
+Les pourcentages portent sur les autoportraits correctement décrits, pas sur
+toutes les chansons d'une année. La sélection par le modèle en phase 1
+conditionne la phase 2 et peut propager des erreurs. La couverture et les
+doublons de la base n'ont pas fait l'objet d'un audit présenté ici. Les
+chansons d'un même artiste ne sont pas nécessairement indépendantes.
+Les proportions globales et par grandes périodes ne sont pas repondérées
+par les effectifs annuels de la base.
+
+\textbf{Petits effectifs et lissage.}
+En 1990, 1991 et 1992, les analyses ne portent que sur 7, 16 et 5 descriptions.
+Les premières fluctuations sont donc fragiles. Pour l'aspect $a$, si $c_{a,t}$
+est le nombre de descriptions qui le citent et $n_t$ le nombre de descriptions
+valides de l'année $t$, la courbe utilise
+\[
+ \widetilde p_{a,t}
+ =100\,\frac{\sum_{u\in W_t} c_{a,u}}{\sum_{u\in W_t} n_u},
+ \qquad W_t=\{t-2,\ldots,t+2\}\cap\{1990,\ldots,2024\}.
+\]
+Ce n'est pas une moyenne simple des pourcentages annuels. Aux extrémités,
+la fenêtre est réduite ; elle peut traverser 2004 et atténuer des ruptures.
+Les axes propres à chaque panneau favorisent la lecture des formes mais
+interdisent de comparer directement leurs amplitudes visuelles.
+
+\textbf{Validité de l'annotation.}
+Un JSON valide n'est pas un jugement validé. Aucun accord inter-annotateurs,
+score de précision ou rappel humain n'est établi dans les résultats étudiés.
+Le même modèle réalise les deux étapes ; la température nulle ne garantit
+pas une reproductibilité exacte entre matériels et versions. La saturation
+des quatre aspects rend prioritaire un contrôle stratifié par année et
+par catégorie, avec conservation de la version des consignes.
+
+\textbf{Portée des conclusions.}
+Les courbes ne permettent pas d'attribuer les changements à une génération,
+au marché, à une technologie ou à une transformation sociale déterminée.
+Elles décrivent un corpus et une procédure de codage, sans prétention causale.
+
+\subsection{Conclusion et sources}
+Dans les annotations examinées, l'autoportrait se construit d'abord autour de
+l'art et des origines, tandis que réussite et vulnérabilité progressent sur
+la période. La prochaine étape scientifique consiste à vérifier ces écarts
+sur un sous-corpus codé par plusieurs lecteurs, puis à tester leur robustesse
+au prompt, au plafond d'aspects et à la composition du corpus.
+
+\enlargethispage{2\baselineskip}
+{\footnotesize\raggedright
+\textbf{Sources du projet.} Notebooks
+\texttt{autoportrait\_qwen3\_32b.ipynb} et
+\texttt{autoportrait2\_qwen3\_32b.ipynb} ; consignes
+\texttt{consigne.md} et \texttt{consigne\_A\_description.md}.
+Les statistiques et figures proviennent des exports locaux du 28 octobre
+2026 : lot \texttt{12938}, descriptions \texttt{8861b}, tableaux
+\texttt{8861\_aspects} et \texttt{8861\_aspects\_par\_annee}.
+L'article est une analyse de ces sorties, non une nouvelle inférence.
+Les paroles et les résultats individuels ne sont pas recopiés dans ce dossier.
+
+\textbf{Éléments complémentaires.}
+\href{https://github.com/BenaventC/CPES2027/tree/main/Autoportrait}{Dépôt GitHub CPES2027, dossier Autoportrait}
+(notebooks, consignes et figures ; hors données locales et résultats individuels non publiés).
+
+\textbf{Ressources.}
+\href{https://huggingface.co/Qwen/Qwen3-32B}{Qwen3-32B, fiche du modèle} ;
+\href{https://docs.vllm.ai/}{documentation vLLM} ;
+\href{https://mermaid.js.org/}{Mermaid} ;
+\href{https://psl.eu/formation/cpes-psl-louis-le-grand}{CPES DAC, PSL--Louis-le-Grand}.
+}
+\begingroup
+\small
+\setlength{\bibsep}{0pt}
+\bibliographystyle{plainnat}
+\bibliography{references}
+\endgroup
+
+\clearpage
+\appendix
+\section{Consigne intégrale de détection de l'autoportrait}
+\label{ann:phase1}
+\textit{Source : \texttt{../consigne.md}, version présente dans le dépôt
+au moment de la rédaction. La mise en forme est adaptée à LaTeX ; le texte
+de la consigne est conservé.}
+
+\input{annexe_detection}
+
+\clearpage
+\section{Consigne intégrale de description des autoportraits}
+\label{ann:phase2}
+\textit{Source : \texttt{../consigne\_A\_description.md}, version présente
+dans le dépôt au moment de la rédaction. Même réserve de provenance
+historique qu'en annexe~\ref{ann:phase1}.}
+
+\input{annexe_description}
+\end{document}

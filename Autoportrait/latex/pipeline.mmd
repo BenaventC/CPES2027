@@ -1,0 +1,20 @@
+---
+config:
+  theme: base
+  themeVariables:
+    primaryColor: "#C48793"
+    primaryTextColor: "#222222"
+    primaryBorderColor: "#222222"
+    lineColor: "#222222"
+    secondaryColor: "#7FBF00"
+    tertiaryColor: "#FFFFFF"
+    fontFamily: "Arial, sans-serif"
+---
+flowchart LR
+    A["Corpus et stratification<br/>84 821 chansons nettoyées<br/>1990–2024 : 12 938 retenues"]
+    B["Phase 1 · Qwen3-32B<br/>8 861 autoportraits<br/>3 887 non · 183 indécisions<br/>7 erreurs exclues"]
+    C["Phase 2 · Qwen3-32B<br/>Description et validation JSON<br/>8 856 descriptions valides<br/>5 erreurs exclues"]
+    D["Deux graphiques<br/>Aspects cités et principaux<br/>Évolution annuelle<br/>Lissage pondéré sur 5 ans"]
+    A --> B --> C --> D
+    classDef output fill:#7FBF00,stroke:#222222,color:#222222;
+    class D output;
