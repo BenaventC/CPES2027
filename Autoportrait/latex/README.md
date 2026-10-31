@@ -61,9 +61,10 @@ de sécurité de l'environnement.
 
 ## Périmètre scientifique
 
-Les valeurs sont calculées à partir des exports locaux du 28 octobre 2026,
-archivés dans `../data/results/archive_consigne_v1/` en attendant les
-résultats de la campagne en cours (consigne révisée) :
+Les valeurs sont calculées à partir des exports locaux du 31 octobre 2026
+(campagne de la consigne révisée, plafond de sept aspects) dans
+`../data/results/` ; les résultats de la première consigne (plafond de
+quatre) restent archivés dans `../data/results/archive_consigne_v1/` :
 
 - `autoportrait_qwen_annotation_12938.csv` ;
 - `autoportrait2_qwen_description_8861b.csv` ;
@@ -74,9 +75,10 @@ résultats de la campagne en cours (consigne révisée) :
   `autoportrait2_qwen_description_8861_mds.csv`, produits par
   `../cooccurrences.py`.
 
-Le dénominateur des figures est **8 856 descriptions valides**, malgré le
+Le dénominateur des figures est **8 819 descriptions valides** (42 erreurs),
+malgré le
 suffixe `8861` qui correspond au nombre de chansons soumises à la phase 2.
 Le document explicite les erreurs, le plan stratifié, le lissage pondéré,
-les limites de validation et le décalage entre la consigne actuelle et
-la fréquence des listes de quatre aspects. Aucune inférence GPU n'est relancée.
+les limites de validation et l'écart entre la règle de parcimonie de la
+consigne et la fréquence des listes longues. Aucune inférence GPU n'est relancée.
 Les données de résultats individuelles ne sont pas copiées ici.

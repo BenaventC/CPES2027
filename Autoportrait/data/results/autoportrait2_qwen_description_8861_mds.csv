@@ -1,13 +1,13 @@
-aspect,dim1,dim2,cite_pct,principal_pct
-Origines,-0.1476,0.5187,57.3,21.4
-"Argent, réussite",-0.4983,-0.3157,53.0,18.3
-"Rue, illégalité",-0.4241,0.1313,53.8,9.8
+aspect,dim1,dim2,frequence_pct,principal_pct
 "Talent, art",-0.5165,-0.0471,59.6,26.8
-"Corps, apparence",0.0266,-0.5567,7.4,0.7
+Origines,-0.1476,0.5187,57.3,21.4
+"Rue, illégalité",-0.4241,0.1313,53.8,9.8
+"Argent, réussite",-0.4983,-0.3157,53.0,18.3
 "Caractère, valeurs",-0.0652,0.4471,52.7,2.6
-"Failles, émotions",0.5787,-0.0189,32.7,11.6
-"Foi, destin",0.2377,0.1088,8.2,0.8
-Proches,0.2887,-0.069,13.9,1.1
-"Séduction, sexualité",0.0544,-0.2624,6.9,0.8
-Ambitions,0.3397,0.0269,13.1,1.2
 Identité collective,0.1259,0.037,37.5,5.1
+"Failles, émotions",0.5787,-0.0189,32.7,11.6
+Proches,0.2887,-0.069,13.9,1.1
+Ambitions,0.3397,0.0269,13.1,1.2
+"Foi, destin",0.2377,0.1088,8.2,0.8
+"Corps, apparence",0.0266,-0.5567,7.4,0.7
+"Séduction, sexualité",0.0544,-0.2624,6.9,0.8

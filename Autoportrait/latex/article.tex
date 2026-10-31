@@ -40,7 +40,7 @@ Année universitaire 2026--2027\par}
 {\large \href{https://www.linkedin.com/in/christophebenavent/}{Christophe Benavent}\par}
 {\small Université Paris Dauphine--PSL --- Dauphine Recherches en Management (DRM)\par}
 \vspace{5pt}
-{\small Étude exploratoire \textperiodcentered{} Résultats exportés le 28 octobre 2026}
+{\small Étude exploratoire \textperiodcentered{} Résultats exportés le 31 octobre 2026}
 \end{center}
 
 {\small\textbf{Remerciements.} Les auteurs remercient ACSS-PSL pour la mise
@@ -63,17 +63,17 @@ Comment les chansons de rap français composent-elles une image de soi, et
 comment les dimensions de cette image évoluent-elles entre 1990 et 2024 ?
 Nous étudions un corpus stratifié de 12\,938 chansons à l'aide d'une annotation
 en deux étapes par Qwen3-32B : identification des autoportraits, puis description
-ordonnée de leurs aspects. Les trois résultats analysés portent sur 8\,856
-descriptions valides. Le talent artistique (59,8\pct), les origines (57,6\pct)
-et le caractère ou les valeurs (57,6\pct) sont les aspects les plus fréquemment
+ordonnée de leurs aspects. Les trois résultats analysés portent sur 8\,819
+descriptions valides. Le talent artistique (59,6\pct), les origines (57,3\pct)
+et la rue et l'illégalité (53,8\pct) sont les aspects les plus fréquemment
 retenus. La structure des cooccurrences oppose un pôle d'affirmation
 (talent, argent, rue) à un pôle introspectif (failles et émotions).
 L'argent et la réussite ainsi que les failles et émotions occupent
 une place plus forte dans les périodes récentes ; l'identité collective
 recule. Ces résultats décrivent les annotations du corpus étudié, non une
 évolution causale du genre. Leur portée reste limitée par l'échantillonnage,
-l'absence de validation humaine mesurée et la fréquente saturation du nombre
-d'aspects autorisé.
+l'absence de validation humaine mesurée et la fréquence des listes longues
+d'aspects au regard de la règle de parcimonie de la consigne.
 
 \textbf{Mots-clés :} rap français ; autoportrait ; humanités numériques ;
 annotation automatique ; Qwen3 ; analyse diachronique.
@@ -83,16 +83,16 @@ annotation automatique ; Qwen3 ; analyse diachronique.
 How do French rap songs construct a self-image, and how do its dimensions
 change between 1990 and 2024? We examine a year-stratified corpus of 12,938
 songs using a two-stage Qwen3-32B annotation workflow: self-portrait detection,
-followed by ranked aspect description. The three sets of results cover 8,856 valid
-descriptions. Artistic talent (59.8\%), origins (57.6\%), and character or
-values (57.6\%) are the most frequently assigned aspects. Aspect co-occurrences
+followed by ranked aspect description. The three sets of results cover 8,819 valid
+descriptions. Artistic talent (59.6\%), origins (57.3\%), and street life and
+illegality (53.8\%) are the most frequently assigned aspects. Aspect co-occurrences
 oppose an assertive pole (talent, money, street) to an introspective pole
 (vulnerabilities and emotions). Money and success,
 as well as vulnerabilities and emotions, are more prominent in recent
 periods, while collective identity declines. These are descriptive patterns
 in model annotations, not causal findings about the genre. Sampling,
-unmeasured human agreement, and frequent saturation of the aspect limit
-restrict their interpretation.
+unmeasured human agreement, and the frequency of long aspect lists relative
+to the prompt's parsimony rule restrict their interpretation.
 
 \textbf{Keywords:} French rap; self-portrait; digital humanities; automatic
 annotation; Qwen3; diachronic analysis.
@@ -165,7 +165,7 @@ respectivement 8\,861, 3\,887 et 183 décisions, plus 7 erreurs techniques.
 Les autoportraits représentent 68,5\pct{} des chansons sélectionnées :
 c'est une proportion brute de l'échantillon, non une estimation pondérée de
 l'ensemble du rap français. La seconde étape ne traite que les 8\,861
-autoportraits : 8\,856 descriptions sont exploitables et 5 sont en erreur.
+autoportraits : 8\,819 descriptions sont exploitables et 42 sont en erreur.
 Le suffixe \texttt{8861} des fichiers désigne donc le lot soumis,
 \emph{pas} le dénominateur des graphiques.
 
@@ -221,8 +221,9 @@ démarcation et le regard explicite d'autrui. Dans sa version actuelle,
 un aspect secondaire doit être central et être le sujet principal d'un
 couplet ou du refrain, ou être développé dans environ un quart du texte ;
 les listes de quatre à sept aspects doivent rester exceptionnelles.
-Le plafond actuel de sept remplace celui de quatre utilisé pour les
-résultats présentés ici, sans modifier rétroactivement ces annotations.
+Cette version plafonnée à sept aspects est celle de la campagne analysée
+ici ; elle remplace la consigne initiale plafonnée à quatre, dont les
+résultats restent archivés dans le dépôt.
 La démarcation n'est pas assimilée au regard d'autrui : ce dernier exige
 un jugement rapporté qui vise le locuteur.
 
@@ -237,7 +238,7 @@ la version exacte utilisée pour produire les résultats présentés.
 
 \subsection{Aspects et indicateurs}
 La description comprend le registre, la temporalité, les démarcations, le
-regard d'autrui et une liste ordonnée de un à quatre aspects parmi douze.
+regard d'autrui et une liste ordonnée de un à sept aspects parmi douze.
 Nous analysons seulement cette dernière liste. Un aspect est dit
 \emph{cité} s'il y figure ; il est \emph{principal} s'il arrive en tête.
 \og Cité \fg{} désigne ici une catégorie attribuée par le modèle, pas le comptage
@@ -248,54 +249,55 @@ les pourcentages de présence ne s'additionnent pas à 100\pct.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{../images/autoportrait2_aspects_8861.png}
-\caption{Aspects cités et principaux dans les 8\,856 descriptions
+\caption{Aspects cités et principaux dans les 8\,819 descriptions
 valides ; à droite, nombre d'aspects retenus par chanson. Figure originale
 du notebook, conservée sans modification.}
 \label{fig:aspects}
 \end{figure}
 
 \rubrique{Le talent et les origines structurent le premier plan}
-Le talent et l'art sont retenus dans 5\,292 chansons (59,8\pct) et occupent la
-première place dans 2\,518 (28,4\pct). Les origines apparaissent dans 5\,099
-descriptions (57,6\pct) et sont principales dans 2\,320 (26,2\pct).
-Ces deux dimensions réunissent ainsi 54,6\pct{} des premiers rangs.
+Le talent et l'art sont retenus dans 5\,255 chansons (59,6\pct) et occupent la
+première place dans 2\,362 (26,8\pct). Les origines apparaissent dans 5\,057
+descriptions (57,3\pct) et sont principales dans 1\,886 (21,4\pct).
+Ces deux dimensions réunissent ainsi 48,2\pct{} des premiers rangs.
 Se présenter comme artiste et situer d'où l'on vient sont donc les deux
 ancrages dominants du classement produit par le modèle.
 
 \rubrique{Être présent n'est pas organiser le portrait}
-Le caractère et les valeurs sont presque aussi fréquents que les origines
-(5\,097 chansons, 57,6\pct), mais ne sont principaux que dans 332 cas
-(3,7\pct). Ils fonctionnent davantage, dans ces annotations, comme une
-dimension d'accompagnement. L'argent et la réussite, cités dans 50,5\pct{}
-des descriptions, sont principaux dans 16,6\pct{} des cas. Les failles et
-émotions (34,2\pct{} de présence) arrivent en tête dans 10,6\pct{} des chansons,
-contre 5,8\pct{} pour la rue et l'illégalité, pourtant citées à une fréquence
-voisine (34,4\pct). Le contraste distingue la diffusion d'un thème de sa
-centralité dans le portrait.
+La rue et l'illégalité sont citées dans 53,8\pct{} des descriptions, mais ne
+sont principales que dans 9,8\pct{} des cas ; le caractère et les valeurs,
+presque aussi fréquents (4\,649 chansons, 52,7\pct), ne sont principaux que
+dans 230 cas (2,6\pct). Ces dimensions fonctionnent davantage, dans ces
+annotations, comme un accompagnement. L'argent et la réussite, cités dans
+53,0\pct{} des descriptions, sont principaux dans 18,3\pct{} des cas, et les
+failles et émotions, bien moins diffusées (32,7\pct{} de présence), arrivent
+en tête dans 11,6\pct{} des chansons. Le contraste distingue la diffusion
+d'un thème de sa centralité dans le portrait.
 
 Les dimensions proches, ambitions, corps, foi et séduction sont moins
 fréquemment retenues. Ce rang ne prouve pas qu'elles soient rares dans les
 paroles : elles peuvent apparaître sans devenir une composante majeure de
-l'image de soi, ou être évincées par le plafond de quatre catégories.
+l'image de soi, ou ne pas franchir le seuil de centralité exigé par la
+consigne.
 
 \rubrique{Un résultat qui oblige à interroger l'instrument}
-Les listes comprennent un aspect dans 122 cas (1,4\pct), deux dans 1\,108
-(12,5\pct), trois dans 1\,632 (18,4\pct) et quatre dans 5\,994 (67,7\pct),
-soit 3,52 aspects en moyenne. Cette saturation est un résultat méthodologique
-majeur. La consigne actuellement présente dans le dépôt demande de ne
-retenir que des dimensions centrales et substantiellement développées,
-normalement deux ou trois, et autorise exceptionnellement jusqu'à sept
-aspects. Les exports ne
-permettent pas d'affirmer que cette version précise a servi à la campagne.
-L'écart appelle donc un audit de provenance et une lecture humaine avant
+Les listes comprennent un aspect dans 47 cas (0,5\pct), deux dans 259
+(2,9\pct), trois dans 2\,823 (32,0\pct), quatre dans 3\,488 (39,6\pct) et
+cinq ou plus dans 2\,202 (25,0\pct), soit 3,96 aspects en moyenne.
+La consigne demande de ne retenir que des dimensions centrales et
+substantiellement développées, normalement deux ou trois, les listes de
+quatre à sept devant rester exceptionnelles : elles représentent pourtant
+64,5\pct{} des descriptions. Le relèvement du plafond de quatre à sept
+aspects a donc déplacé la saturation sans la résorber. L'écart entre la
+règle énoncée et la pratique du modèle appelle une lecture humaine avant
 d'interpréter cette multiplicité comme une propriété des chansons.
 
 \section{Résultat 2 : la structure des cooccurrences}
 
 \rubrique{Les co-citations fréquentes suivent d'abord la fréquence}
-Les paires les plus co-citées réunissent les aspects dominants : caractère
-et origines (35,6\pct), talent et origines (35,5\pct), talent et argent
-(34,5\pct). Cette lecture brute reflète en partie la fréquence de chaque
+Les paires les plus co-citées réunissent les aspects dominants : argent et
+talent (35,3\pct), talent et origines (35,2\pct), argent et rue (32,9\pct).
+Cette lecture brute reflète en partie la fréquence de chaque
 aspect ; le coefficient phi, qui la corrige, est donc nécessaire pour
 parler de structure. Les matrices complètes de co-citation et de phi sont
 exportées en CSV par le script \texttt{cooccurrences.py} ; seule leur
@@ -304,25 +306,24 @@ reproduite ici.
 
 \rubrique{Deux pôles : l'affirmation contre l'introspection}
 Les associations positives dessinent un pôle d'affirmation : argent et
-talent ($\varphi=+0{,}18$), rue et argent ($+0{,}12$), caractère et
+rue ($\varphi=+0{,}18$), argent et talent ($+0{,}15$), caractère et
 origines ($+0{,}10$). Symétriquement, les failles et émotions s'associent
-aux ambitions ($+0{,}10$) et aux proches ($+0{,}09$), esquissant un pôle
+aux proches ($+0{,}15$) et aux ambitions ($+0{,}11$), esquissant un pôle
 introspectif. Les répulsions les plus fortes opposent précisément ces deux
-pôles : failles contre talent ($-0{,}39$), contre argent ($-0{,}30$) et
-contre rue ($-0{,}23$). Dans ces annotations, l'egotrip et la confession
+pôles : failles contre talent ($-0{,}33$), contre argent ($-0{,}24$) et
+contre rue ($-0{,}19$). Dans ces annotations, l'egotrip et la confession
 sont des gestes largement disjoints au sein d'une même chanson. On note
-aussi l'affinité entre foi et identité collective ($+0{,}11$) malgré une
-co-citation rare (1,8\pct), et la répulsion entre corps et origines
-($-0{,}23$).
+aussi les répulsions du corps et de l'apparence avec les origines
+($-0{,}23$) et avec le caractère ($-0{,}18$).
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=.8\linewidth]{../images/autoportrait2_aspects_mds_8861.png}
 \caption{Projection MDS métrique classique (PCoA) des douze aspects sur la
-dissimilarité $1-\varphi$, calculée sur les 8\,856 descriptions valides.
+dissimilarité $1-\varphi$, calculée sur les 8\,819 descriptions valides.
 Chaque aspect porte un double point : la surface orange est proportionnelle
 à la part des chansons qui citent l'aspect, le disque cramoisi à la part où
-il est principal (premier rang) ; le plan restitue 40,2\pct{} de la variance
+il est principal (premier rang) ; le plan restitue 38,4\pct{} de la variance
 positive. Script \texttt{cooccurrences.py} et section 5.2 du notebook.}
 \label{fig:mds}
 \end{figure}
@@ -335,21 +336,22 @@ talent, argent et rue --- au pôle introspectif des failles, des proches et
 des ambitions ; le double point distingue la diffusion d'un thème de sa
 centralité : caractère et valeurs, très cités, sont rarement principaux,
 quand le talent, les origines et l'argent organisent le plus souvent les
-portraits. Les origines et le
-caractère occupent le bas de la carte, en position intermédiaire : ce socle
-commun se combine avec les deux pôles plutôt qu'il ne s'oppose à eux.
-L'identité collective et la foi se tiennent à l'écart du pôle d'affirmation,
-cohérentes avec leur affinité mutuelle. Cette carte est une approximation
+portraits. Les origines et le caractère occupent le haut de la carte, en
+position intermédiaire : ce socle commun se combine avec les deux pôles
+plutôt qu'il ne s'oppose à eux. L'identité collective et la foi occupent
+le centre droit, à l'écart du pôle d'affirmation ; le corps et la séduction
+s'isolent en bas. Cette carte est une approximation
 plane de la matrice complète ; elle se lit comme une synthèse visuelle des
 matrices de cooccurrence, non comme une mesure supplémentaire.
 
-\rubrique{Une structure à lire avec le plafond en tête}
-Le plafond de quatre aspects crée une concurrence mécanique : deux aspects
-très fréquents peuvent présenter un phi négatif simplement parce que la
-liste est saturée. Les répulsions observées, notamment celles des failles
+\rubrique{Une structure à lire avec la consigne en tête}
+Le plafond de sept aspects et l'exigence de centralité créent une
+concurrence mécanique : deux aspects très fréquents peuvent présenter un
+phi négatif simplement parce que la liste est contrainte. Les répulsions
+observées, notamment celles des failles
 et émotions, dépassent toutefois ce seul effet de budget ; leur ampleur et
 leur polarité cohérente suggèrent une organisation réelle des registres,
-à confirmer par lecture humaine et par les données de la consigne révisée.
+à confirmer par lecture humaine.
 
 \section{Résultat 3 : des recompositions chronologiques}
 \begin{figure}[t]
@@ -368,32 +370,33 @@ le repère 2004 indique le changement de plan d'échantillonnage.}
 \toprule
 Aspect cité (\%) & 1990--2003 & 2004--2013 & 2014--2024 & Écart (points)\\
 \midrule
-Argent, réussite & 32,8 & 41,7 & 63,1 & +30,3\\
-Failles, émotions & 24,7 & 30,7 & 40,0 & +15,3\\
-Talent, art & 63,5 & 64,2 & 55,1 & $-8,4$\\
-Origines & 62,7 & 64,0 & 50,9 & $-11,8$\\
-Caractère, valeurs & 65,3 & 60,8 & 52,5 & $-12,8$\\
-Identité collective & 31,9 & 27,7 & 13,9 & $-18,0$\\
+Argent, réussite & 39,1 & 44,1 & 64,5 & +25,4\\
+Failles, émotions & 20,5 & 28,5 & 40,1 & +19,6\\
+Talent, art & 64,5 & 62,9 & 55,4 & $-9,1$\\
+Origines & 60,5 & 62,9 & 52,0 & $-8,5$\\
+Caractère, valeurs & 58,6 & 55,5 & 48,6 & $-10,0$\\
+Identité collective & 51,8 & 45,0 & 26,9 & $-24,9$\\
 \bottomrule
 \end{tabular}
 \caption{Parts non lissées par période, recalculées en cumulant les
-effectifs annuels. Dénominateurs : 1\,395, 3\,250 et 4\,211 descriptions.
+effectifs annuels. Dénominateurs : 1\,387, 3\,235 et 4\,197 descriptions.
 Écart entre la dernière et la première période, sur les valeurs affichées.}
 \label{tab:periodes}
 \end{table}
 
-La montée de l'argent et de la réussite est la transformation la plus nette
-parmi ces indicateurs. Elle accompagne, plutôt qu'elle n'exclut, une place
-croissante des failles et émotions. Le graphe suggère donc une
+La montée de l'argent et de la réussite est la transformation positive la
+plus nette parmi ces indicateurs. Elle accompagne, plutôt qu'elle n'exclut,
+une place croissante des failles et émotions. Le graphe suggère donc une
 \emph{coexistence} accrue de la réussite et de la vulnérabilité à l'échelle
 des périodes ; l'analyse des cooccurrences (résultat 2) montre qu'elles restent
-largement disjointes au sein des mêmes chansons ($\varphi=-0{,}30$) :
+largement disjointes au sein des mêmes chansons ($\varphi=-0{,}24$) :
 c'est le répertoire qui se diversifie, pas chaque texte.
 Le talent et les origines restent fréquents mais reculent dans la période
-récente, tandis que l'identité collective diminue fortement.
+récente, tandis que l'identité collective s'effondre de près de
+vingt-cinq points, le recul le plus marqué de la grille.
 
-Les trajectoires ne sont pas toutes monotones : la rue et l'illégalité
-oscillent, les proches restent relativement stables et les ambitions
+Les trajectoires ne sont pas toutes de même ampleur : la rue et l'illégalité
+progressent modérément (+9,3 points), les proches et les ambitions
 évoluent peu. Il ne s'agit pas d'un remplacement uniforme du collectif par
 l'individuel. Aucun test de significativité ni modèle contrôlant les artistes
 n'est mobilisé : les écarts sont descriptifs.
@@ -441,8 +444,8 @@ interdisent de comparer directement leurs amplitudes visuelles.
 Un JSON valide n'est pas un jugement validé. Aucun accord inter-annotateurs,
 score de précision ou rappel humain n'est établi dans les résultats étudiés.
 Le même modèle réalise les deux étapes ; la température nulle ne garantit
-pas une reproductibilité exacte entre matériels et versions. La saturation
-des quatre aspects rend prioritaire un contrôle stratifié par année et
+pas une reproductibilité exacte entre matériels et versions. La fréquence
+des listes de quatre aspects et plus rend prioritaire un contrôle stratifié par année et
 par catégorie, avec conservation de la version des consignes.
 
 \textbf{Portée des conclusions.}
@@ -463,7 +466,7 @@ au prompt, au plafond d'aspects et à la composition du corpus.
 \texttt{autoportrait\_qwen3\_32b.ipynb} et
 \texttt{autoportrait2\_qwen3\_32b.ipynb} ; consignes
 \texttt{consigne.md} et \texttt{consigne\_A\_description.md}.
-Les statistiques et figures proviennent des exports locaux du 28 octobre
+Les statistiques et figures proviennent des exports locaux du 31 octobre
 2026 : lot \texttt{12938}, descriptions \texttt{8861b}, tableaux
 \texttt{8861\_aspects} et \texttt{8861\_aspects\_par\_annee} ; matrices
 \texttt{8861\_cooccurrence} et \texttt{8861\_phi} produites par le script
