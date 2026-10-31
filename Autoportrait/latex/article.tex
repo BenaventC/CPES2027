@@ -27,7 +27,7 @@
 \begin{document}
 \thispagestyle{empty}
 \begin{center}
-{\LARGE\bfseries L'autoportrait dans le rap français\footnotemark\par}
+{\LARGE\bfseries L'autoportrait dans le rap français\par}
 \vspace{3pt}
 {\large Aspects et transformations de l'autoportrait, 1990--2024\par}
 \vspace{9pt}
@@ -42,18 +42,33 @@ Année universitaire 2026--2027\par}
 \vspace{5pt}
 {\small Étude exploratoire \textperiodcentered{} Résultats exportés le 28 octobre 2026}
 \end{center}
-\footnotetext{Les auteurs remercient ACSS-PSL pour la mise à disposition
-des ressources de calcul et pour l'assistance en ingénierie apportée à ce projet.}
+
+{\small\textbf{Remerciements.} Les auteurs remercient ACSS-PSL pour la mise
+à disposition des ressources de calcul et pour l'assistance en ingénierie
+apportée à ce projet.\par}
+
+{\small\textbf{Déclaration sur l'usage de l'intelligence artificielle.}
+Selon la déclaration des auteurs, aucune rédaction directe du texte de cette
+note, aucune exécution des calculs qui la fondent, ni aucune réalisation
+opérationnelle du déploiement de la pile technique nécessaire à l'exécution
+et à la production n'ont été effectuées par les auteurs humains : ces tâches
+ont été confiées aux machines. Cette délégation ne signifie ni absence de
+travail intellectuel humain ni transfert de responsabilité. Les auteurs ont
+lu, pensé, conceptualisé l'étude, structuré le workflow, vérifié les résultats
+intermédiaires et corrigé le processus. Ils endossent la responsabilité
+du texte, des choix méthodologiques et des résultats présentés.\par}
 
 \rubrique{Résumé}
 Comment les chansons de rap français composent-elles une image de soi, et
 comment les dimensions de cette image évoluent-elles entre 1990 et 2024 ?
 Nous étudions un corpus stratifié de 12\,938 chansons à l'aide d'une annotation
 en deux étapes par Qwen3-32B : identification des autoportraits, puis description
-ordonnée de leurs aspects. Les deux graphiques analysés portent sur 8\,856
+ordonnée de leurs aspects. Les trois résultats analysés portent sur 8\,856
 descriptions valides. Le talent artistique (59,8\pct), les origines (57,6\pct)
 et le caractère ou les valeurs (57,6\pct) sont les aspects les plus fréquemment
-retenus. L'argent et la réussite ainsi que les failles et émotions occupent
+retenus. La structure des cooccurrences oppose un pôle d'affirmation
+(talent, argent, rue) à un pôle introspectif (failles et émotions).
+L'argent et la réussite ainsi que les failles et émotions occupent
 une place plus forte dans les périodes récentes ; l'identité collective
 recule. Ces résultats décrivent les annotations du corpus étudié, non une
 évolution causale du genre. Leur portée reste limitée par l'échantillonnage,
@@ -68,9 +83,11 @@ annotation automatique ; Qwen3 ; analyse diachronique.
 How do French rap songs construct a self-image, and how do its dimensions
 change between 1990 and 2024? We examine a year-stratified corpus of 12,938
 songs using a two-stage Qwen3-32B annotation workflow: self-portrait detection,
-followed by ranked aspect description. The two charts cover 8,856 valid
+followed by ranked aspect description. The three sets of results cover 8,856 valid
 descriptions. Artistic talent (59.8\%), origins (57.6\%), and character or
-values (57.6\%) are the most frequently assigned aspects. Money and success,
+values (57.6\%) are the most frequently assigned aspects. Aspect co-occurrences
+oppose an assertive pole (talent, money, street) to an introspective pole
+(vulnerabilities and emotions). Money and success,
 as well as vulnerabilities and emotions, are more prominent in recent
 periods, while collective identity declines. These are descriptive patterns
 in model annotations, not causal findings about the genre. Sampling,
@@ -82,9 +99,11 @@ annotation; Qwen3; diachronic analysis.
 \end{otherlanguage}
 
 \section{Question de recherche}
-L'autoportrait ne se réduit ni au pronom \og je \fg{} ni à l'autobiographie :
-le locuteur assemble les traits de sa propre image plutôt qu'il ne raconte
-des événements. Egotrip, confession et revendication de valeurs peuvent
+La distinction entre autoportrait et autobiographie s'appuie sur
+\citet{beaujour1980}, \emph{Miroirs d'encre}. Dans notre opérationnalisation,
+l'autoportrait ne se réduit pas au pronom \og je \fg{} : le locuteur assemble
+les traits de sa propre image plutôt qu'il n'organise son propos autour
+du récit de sa vie. Egotrip, confession et revendication de valeurs peuvent
 relever de ce même geste.
 
 \textbf{Question centrale : quelles dimensions structurent l'autoportrait
@@ -93,17 +112,35 @@ leurs fréquences évoluent-elles de 1990 à 2024 ?} Nous distinguons présence
 et premier rang des aspects. L'analyse porte sur l'image énoncée, non sur
 la biographie ou la sincérité des artistes.
 
-\newpage
 \section{Corpus et chaîne de traitement}
 \textbf{Ancrage théorique.}
-L'étude de \citet{bethune2011}, \emph{Sur les traces du rap},
-constitue la référence principale du projet. Elle inspire le codage des
-facettes de l'autoportrait et la conception des prompts des deux étapes
-d'annotation. La grille de douze aspects et les règles de décision sont
-une opérationnalisation propre à cette étude, et non une grille reproduite
-à l'identique depuis l'article.
+La définition de l'autoportrait mobilisée dans cette étude s'appuie
+principalement sur \citet{beaujour1980}, qui le distingue de l'autobiographie
+par la formule : \og Je ne vous raconterai pas ce que j'ai fait : je vais
+vous dire qui je suis \fg{}.
+Cette distinction fonde notre attention à la composition d'une image de soi,
+plutôt qu'au seul récit d'événements biographiques. L'article de
+\citet{bethune2011}, \emph{Sur les traces du rap}, éclaire quant à lui
+l'écriture et les outils du rappeur ; il ne constitue pas la source
+principale de notre définition de l'autoportrait. La grille de douze aspects,
+les prompts et les règles de décision sont une opérationnalisation propre
+à cette étude, et non une grille reproduite à l'identique depuis ces travaux.
 
 \subsection{Un échantillonnage stratifié par année}
+La provenance de la base est documentée par \citet{decourson2024},
+\emph{LRFAF : une exploration numérique du rap français depuis les années
+1990}, disponible sur \href{https://osf.io/d96tr_v1}{SocArXiv (version 1,
+publiée le 13 mars 2024)}. Ce travail constitue la référence pour la construction du corpus
+à partir des paroles disponibles sur \textbf{Genius}. L'auteur décrit un
+recensement d'artistes croisant Wikipédia, Wikidata et les comptes vérifiés
+de Genius, puis une collecte avec LyricsGenius et un filtrage linguistique.
+Le manuscrit daté du 5 février 2024 présente 37\,307 textes de 611 artistes,
+diffusés dans le \href{https://huggingface.co/datasets/regicid/LRFAF}{corpus LRFAF}.
+Ces effectifs sont ceux de la version décrite par l'auteur, non ceux de
+notre base locale. La filiation est signalée ici, mais la révision exacte
+et les opérations ayant conduit à la base locale plus étendue restent à
+documenter ; nous n'assimilons donc pas les deux versions.
+
 La base locale fournit 84\,821 chansons aux paroles exploitables après
 nettoyage. Le corpus d'étude comprend toutes les 2\,438 chansons datées
 d'avant 2004, puis 500 chansons par année de 2004 à 2024, tirées sans remise
@@ -115,7 +152,7 @@ chronologique de la base.
 
 \begin{center}
 \includegraphics[width=.95\linewidth,height=6.7cm,keepaspectratio]{pipeline.pdf}
-\captionof{figure}{Chaîne de traitement. Diagramme produit localement à partir
+\captionof{figure}{Chaîne de traitement. Diagramme produit à partir
 de la source Mermaid \texttt{pipeline.mmd}. Les erreurs techniques restent
 distinctes des décisions interprétatives.}
 \label{fig:pipeline}
@@ -162,9 +199,10 @@ campagne ne sont pas établies ici ; elles ne sont donc pas déduites de
 l'environnement actuel.
 
 \subsection{Consignes : de la définition au codage des facettes}
-Dans le prolongement de \citet{bethune2011}, les prompts traduisent
-l'inspiration théorique en décisions explicites, sans attribuer à cet
-article la grille exacte construite pour le projet.
+Les prompts traduisent la distinction de \citet{beaujour1980} entre
+autoportrait et autobiographie en décisions explicites, tandis que
+\citet{bethune2011} nourrit la réflexion sur l'écriture et les outils du
+rappeur. La grille exacte de codage reste une construction propre au projet.
 
 \textbf{Phase 1 : reconnaître le geste d'autoportrait.}
 La consigne articule deux conditions : le locuteur est le sujet du texte
@@ -178,10 +216,13 @@ contenir une justification sans citation des paroles et l'une des trois
 
 \textbf{Phase 2 : décrire et hiérarchiser les facettes.}
 La consigne décrit le registre (egotrip, introspection, manifeste, mixte),
-un à quatre aspects ordonnés parmi douze, la temporalité, les figures de
+un à sept aspects ordonnés parmi douze, la temporalité, les figures de
 démarcation et le regard explicite d'autrui. Dans sa version actuelle,
-un aspect secondaire doit occuper au moins un couplet, le refrain ou environ
-un quart du texte ; le quatrième doit rester exceptionnel.
+un aspect secondaire doit être central et être le sujet principal d'un
+couplet ou du refrain, ou être développé dans environ un quart du texte ;
+les listes de quatre à sept aspects doivent rester exceptionnelles.
+Le plafond actuel de sept remplace celui de quatre utilisé pour les
+résultats présentés ici, sans modifier rétroactivement ces annotations.
 La démarcation n'est pas assimilée au regard d'autrui : ce dernier exige
 un jugement rapporté qui vise le locuteur.
 
@@ -203,15 +244,15 @@ Nous analysons seulement cette dernière liste. Un aspect est dit
 d'un mot ni une citation littérale. Plusieurs aspects pouvant être retenus,
 les pourcentages de présence ne s'additionnent pas à 100\pct.
 
-\newpage
 \section{Résultat 1 : les composantes de l'image de soi}
-\begin{center}
+\begin{figure}[t]
+\centering
 \includegraphics[width=\linewidth]{../images/autoportrait2_aspects_8861.png}
-\captionof{figure}{Aspects cités et principaux dans les 8\,856 descriptions
+\caption{Aspects cités et principaux dans les 8\,856 descriptions
 valides ; à droite, nombre d'aspects retenus par chanson. Figure originale
 du notebook, conservée sans modification.}
 \label{fig:aspects}
-\end{center}
+\end{figure}
 
 \rubrique{Le talent et les origines structurent le premier plan}
 Le talent et l'art sont retenus dans 5\,292 chansons (59,8\pct) et occupent la
@@ -242,24 +283,86 @@ Les listes comprennent un aspect dans 122 cas (1,4\pct), deux dans 1\,108
 (12,5\pct), trois dans 1\,632 (18,4\pct) et quatre dans 5\,994 (67,7\pct),
 soit 3,52 aspects en moyenne. Cette saturation est un résultat méthodologique
 majeur. La consigne actuellement présente dans le dépôt demande de ne
-retenir un aspect secondaire que s'il occupe un couplet, le refrain ou environ
-un quart du texte, et de rendre le quatrième exceptionnel. Les exports ne
+retenir que des dimensions centrales et substantiellement développées,
+normalement deux ou trois, et autorise exceptionnellement jusqu'à sept
+aspects. Les exports ne
 permettent pas d'affirmer que cette version précise a servi à la campagne.
 L'écart appelle donc un audit de provenance et une lecture humaine avant
 d'interpréter cette multiplicité comme une propriété des chansons.
 
-\newpage
-\section{Résultat 2 : des recompositions chronologiques}
-\begin{center}
+\section{Résultat 2 : la structure des cooccurrences}
+
+\rubrique{Les co-citations fréquentes suivent d'abord la fréquence}
+Les paires les plus co-citées réunissent les aspects dominants : caractère
+et origines (35,6\pct), talent et origines (35,5\pct), talent et argent
+(34,5\pct). Cette lecture brute reflète en partie la fréquence de chaque
+aspect ; le coefficient phi, qui la corrige, est donc nécessaire pour
+parler de structure. Les matrices complètes de co-citation et de phi sont
+exportées en CSV par le script \texttt{cooccurrences.py} ; seule leur
+synthèse visuelle, la projection MDS de la figure~\ref{fig:mds}, est
+reproduite ici.
+
+\rubrique{Deux pôles : l'affirmation contre l'introspection}
+Les associations positives dessinent un pôle d'affirmation : argent et
+talent ($\varphi=+0{,}18$), rue et argent ($+0{,}12$), caractère et
+origines ($+0{,}10$). Symétriquement, les failles et émotions s'associent
+aux ambitions ($+0{,}10$) et aux proches ($+0{,}09$), esquissant un pôle
+introspectif. Les répulsions les plus fortes opposent précisément ces deux
+pôles : failles contre talent ($-0{,}39$), contre argent ($-0{,}30$) et
+contre rue ($-0{,}23$). Dans ces annotations, l'egotrip et la confession
+sont des gestes largement disjoints au sein d'une même chanson. On note
+aussi l'affinité entre foi et identité collective ($+0{,}11$) malgré une
+co-citation rare (1,8\pct), et la répulsion entre corps et origines
+($-0{,}23$).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=.8\linewidth]{../images/autoportrait2_aspects_mds_8861.png}
+\caption{Projection MDS métrique classique (PCoA) des douze aspects sur la
+dissimilarité $1-\varphi$, calculée sur les 8\,856 descriptions valides.
+Chaque aspect porte un double point : la surface orange est proportionnelle
+à la part des chansons qui citent l'aspect, le disque cramoisi à la part où
+il est principal (premier rang) ; le plan restitue 40,2\pct{} de la variance
+positive. Script \texttt{cooccurrences.py} et section 5.2 du notebook.}
+\label{fig:mds}
+\end{figure}
+
+\rubrique{La carte des similarités confirme l'axe affirmation--introspection}
+La projection MDS (figure~\ref{fig:mds}) traduit la matrice des phi en
+distances : deux aspects sont proches s'ils tendent à être cités dans les
+mêmes chansons. La première dimension oppose le pôle d'affirmation ---
+talent, argent et rue --- au pôle introspectif des failles, des proches et
+des ambitions ; le double point distingue la diffusion d'un thème de sa
+centralité : caractère et valeurs, très cités, sont rarement principaux,
+quand le talent, les origines et l'argent organisent le plus souvent les
+portraits. Les origines et le
+caractère occupent le bas de la carte, en position intermédiaire : ce socle
+commun se combine avec les deux pôles plutôt qu'il ne s'oppose à eux.
+L'identité collective et la foi se tiennent à l'écart du pôle d'affirmation,
+cohérentes avec leur affinité mutuelle. Cette carte est une approximation
+plane de la matrice complète ; elle se lit comme une synthèse visuelle des
+matrices de cooccurrence, non comme une mesure supplémentaire.
+
+\rubrique{Une structure à lire avec le plafond en tête}
+Le plafond de quatre aspects crée une concurrence mécanique : deux aspects
+très fréquents peuvent présenter un phi négatif simplement parce que la
+liste est saturée. Les répulsions observées, notamment celles des failles
+et émotions, dépassent toutefois ce seul effet de budget ; leur ampleur et
+leur polarité cohérente suggèrent une organisation réelle des registres,
+à confirmer par lecture humaine et par les données de la consigne révisée.
+
+\section{Résultat 3 : des recompositions chronologiques}
+\begin{figure}[t]
+\centering
 \includegraphics[width=\linewidth]{../images/autoportrait2_aspects_evolution_8861.png}
-\captionof{figure}{Évolution annuelle par aspect : points bruts, présence
+\caption{Évolution annuelle par aspect : points bruts, présence
 lissée et premier rang lissé. Moyenne mobile centrée sur cinq ans,
 pondérée par les effectifs. Les échelles verticales diffèrent entre panneaux ;
 le repère 2004 indique le changement de plan d'échantillonnage.}
 \label{fig:evolution}
-\end{center}
-\vspace{-4pt}
-\begin{center}
+\end{figure}
+\begin{table}[htb]
+\centering
 \small
 \begin{tabular}{lrrrr}
 \toprule
@@ -273,17 +376,19 @@ Caractère, valeurs & 65,3 & 60,8 & 52,5 & $-12,8$\\
 Identité collective & 31,9 & 27,7 & 13,9 & $-18,0$\\
 \bottomrule
 \end{tabular}
-\captionof{table}{Parts non lissées par période, recalculées en cumulant les
+\caption{Parts non lissées par période, recalculées en cumulant les
 effectifs annuels. Dénominateurs : 1\,395, 3\,250 et 4\,211 descriptions.
 Écart entre la dernière et la première période, sur les valeurs affichées.}
 \label{tab:periodes}
-\end{center}
+\end{table}
 
 La montée de l'argent et de la réussite est la transformation la plus nette
 parmi ces indicateurs. Elle accompagne, plutôt qu'elle n'exclut, une place
 croissante des failles et émotions. Le graphe suggère donc une
 \emph{coexistence} accrue de la réussite et de la vulnérabilité à l'échelle
-des périodes ; il ne démontre pas qu'elles coexistent dans les mêmes chansons.
+des périodes ; l'analyse des cooccurrences (résultat 2) montre qu'elles restent
+largement disjointes au sein des mêmes chansons ($\varphi=-0{,}30$) :
+c'est le répertoire qui se diversifie, pas chaque texte.
 Le talent et les origines restent fréquents mais reculent dans la période
 récente, tandis que l'identité collective diminue fortement.
 
@@ -293,15 +398,17 @@ oscillent, les proches restent relativement stables et les ambitions
 l'individuel. Aucun test de significativité ni modèle contrôlant les artistes
 n'est mobilisé : les écarts sont descriptifs.
 
-\newpage
 \section{Discussion, limites et reproductibilité}
-\subsection{Ce que les deux figures permettent de soutenir}
+\subsection{Ce que les trois résultats permettent de soutenir}
 Le rapprochement des figures invite à distinguer un socle durable et des
 recompositions. L'art et les origines dominent globalement les premiers rangs,
 mais leur présence relative est moins forte en fin de période. À l'inverse,
 la réussite et la vulnérabilité gagnent en visibilité. L'hypothèse
 interprétative est celle d'un élargissement des manières de se présenter,
 plutôt que d'une opposition simple entre vantardise et introspection.
+La structure des cooccurrences précise cette hypothèse : réussite et
+vulnérabilité progressent ensemble dans le répertoire tout en restant
+largement disjointes dans les chansons.
 Cette hypothèse doit être confrontée aux textes : les graphiques ne
 mesurent ni les intentions des artistes, ni la réception des publics.
 
@@ -358,12 +465,16 @@ au prompt, au plafond d'aspects et à la composition du corpus.
 \texttt{consigne.md} et \texttt{consigne\_A\_description.md}.
 Les statistiques et figures proviennent des exports locaux du 28 octobre
 2026 : lot \texttt{12938}, descriptions \texttt{8861b}, tableaux
-\texttt{8861\_aspects} et \texttt{8861\_aspects\_par\_annee}.
+\texttt{8861\_aspects} et \texttt{8861\_aspects\_par\_annee} ; matrices
+\texttt{8861\_cooccurrence} et \texttt{8861\_phi} produites par le script
+\texttt{cooccurrences.py}.
 L'article est une analyse de ces sorties, non une nouvelle inférence.
 Les paroles et les résultats individuels ne sont pas recopiés dans ce dossier.
 
-\textbf{Éléments complémentaires.}
-\href{https://github.com/BenaventC/CPES2027/tree/main/Autoportrait}{Dépôt GitHub CPES2027, dossier Autoportrait}
+\textbf{Disponibilité du code et des données.}
+Le code, les consignes et les figures qui ont permis de produire cet article
+sont disponibles dans le
+\href{https://github.com/BenaventC/CPES2027/tree/main/Autoportrait}{dépôt GitHub CPES2027, dossier Autoportrait}
 (notebooks, consignes et figures ; hors données locales et résultats individuels non publiés).
 
 \textbf{Ressources.}
@@ -372,6 +483,7 @@ Les paroles et les résultats individuels ne sont pas recopiés dans ce dossier.
 \href{https://mermaid.js.org/}{Mermaid} ;
 \href{https://psl.eu/formation/cpes-psl-louis-le-grand}{CPES DAC, PSL--Louis-le-Grand}.
 }
+
 \begingroup
 \small
 \setlength{\bibsep}{0pt}
@@ -387,7 +499,10 @@ Les paroles et les résultats individuels ne sont pas recopiés dans ce dossier.
 au moment de la rédaction. La mise en forme est adaptée à LaTeX ; le texte
 de la consigne est conservé.}
 
+\begingroup
+\footnotesize
 \input{annexe_detection}
+\endgroup
 
 \clearpage
 \section{Consigne intégrale de description des autoportraits}
@@ -396,5 +511,8 @@ de la consigne est conservé.}
 dans le dépôt au moment de la rédaction. Même réserve de provenance
 historique qu'en annexe~\ref{ann:phase1}.}
 
+\begingroup
+\footnotesize
 \input{annexe_description}
+\endgroup
 \end{document}

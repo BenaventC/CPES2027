@@ -11,7 +11,15 @@ Juge la chanson entière ; un refrain répété ne compte qu'une fois. Tiens-toi
 
 ## 2. aspects : de quoi son portrait est-il fait ?
 
-Les aspects qui construisent vraiment le portrait, du plus important au moins important : 1 au minimum, 4 au maximum. Procède ainsi : choisis d'abord l'aspect dominant ; ajoute ensuite un autre aspect seulement s'il occupe à lui seul au moins un couplet entier, le refrain, ou environ un quart du texte. Un thème présent dans quelques vers, une allusion ou un détail ne compte pas, même s'il est clairement identifiable. En pratique, la plupart des chansons ont 1 ou 2 aspects, parfois 3 ; 4 doit rester exceptionnel. Ne complète jamais la liste pour atteindre 4.
+Sélectionne les aspects indispensables pour résumer le portrait, du plus important au moins important, et non tous les thèmes identifiables. Retiens normalement 2 ou 3 aspects ; un seul suffit si le portrait est centré sur une seule dimension. Les listes de 4 à 7 aspects doivent rester exceptionnelles et satisfaire les mêmes critères de centralité pour chaque dimension. Retiens 1 aspect au minimum et 7 au maximum : ce maximum est une limite, jamais un objectif.
+
+Procède ainsi :
+
+1. Choisis l'aspect dominant : celui qui définit le mieux l'image que le narrateur construit de lui-même.
+2. N'ajoute un aspect que s'il constitue une dimension distincte et centrale du portrait. Il doit être le sujet principal d'au moins un couplet entier ou du refrain, ou être développé dans environ un quart du texte hors répétitions du refrain. Être simplement mentionné dans un couplet ne suffit pas.
+3. Pour chaque ajout, demande-toi : « Si je retire cet aspect du résumé, est-ce que je perds une dimension essentielle de la façon dont il se présente ? » Si non, écarte-le. Une allusion, quelques vers isolés, un détail ou un thème servant seulement à illustrer un autre aspect ne comptent pas.
+4. Évite le double comptage : un même passage ne suffit pas à justifier deux aspects voisins. Par exemple, citer son quartier n'implique pas une identité collective revendiquée ; raconter un trafic n'implique pas un développement autonome sur l'argent ; affirmer sa loyauté au détour d'un récit de rue ne suffit pas à ajouter un aspect sur les valeurs. Ne retiens les deux catégories que si chacune est développée comme une dimension essentielle à part entière.
+5. Pour chaque ajout au-delà des trois premiers aspects, jusqu'à sept au maximum, vérifie que tous les aspects retenus satisfont ces critères et qu'un résumé sans cet ajout omettrait une dimension aussi structurante que les autres. Chaque aspect supplémentaire doit avoir un développement substantiel propre, pas seulement quelques indices dispersés. Dans le doute, ne l'ajoute pas. Ne complète jamais la liste pour atteindre une longueur donnée.
 
 - "origines" : quartier, ville, pays, milieu social, famille d'origine ;
 - "argent_reussite" : argent, biens, luxe, succès, célébrité ;
@@ -57,6 +65,6 @@ Réponds uniquement par un objet JSON, avec ces champs dans cet ordre :
 
 {"justification": "...", "registre": "...", "aspects": ["..."], "temporalite": "...", "demarcation": ["..."], "regard_des_autres": "..."}
 
-justification : une ou deux phrases en français courant qui résument le portrait, sans citer les paroles. N'y écris aucun nom de catégorie ni identifiant (pas de « talent_art », « egotrip », « failles_emotions », etc.) et pas de parenthèses renvoyant aux champs : décris le portrait avec tes propres mots.
+justification : une ou deux phrases en français courant qui résument le portrait, sans citer les paroles. Si tu retiens plus de trois aspects, explique aussi brièvement pourquoi les dimensions supplémentaires sont indispensables au portrait et non secondaires. N'y écris aucun nom de catégorie ni identifiant (pas de « talent_art », « egotrip », « failles_emotions », etc.) et pas de parenthèses renvoyant aux champs : décris le portrait avec tes propres mots.
 
-aspects : dans ta réflexion, pour chaque aspect envisagé, demande-toi s'il occupe au moins un couplet entier, le refrain ou un quart du texte, et écarte-le sinon. Le champ "aspects" reprend exactement la liste retenue à l'issue de ce tri, sans y rajouter les aspects écartés.
+aspects : applique le tri de la section 2 et ordonne les aspects retenus du plus important au moins important. Vérifie que chaque aspect est central, substantiellement développé et distinct des autres ; supprime tout aspect seulement mentionné, redondant ou dispensable au résumé. Le champ "aspects" contient de 1 à 7 aspects et reprend exactement cette sélection, sans réintroduire les aspects écartés. Tout ajout au-delà de trois aspects exige la justification spécifique indiquée ci-dessus.

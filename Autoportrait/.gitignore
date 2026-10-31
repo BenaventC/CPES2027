@@ -5,3 +5,9 @@ __pycache__/
 
 # Corpus d'étude stratifié : contient les paroles, régénéré par le carnet (étape 2).
 data/results/corpus_etude_stratifie.csv
+
+# Journaux de reprise avec raisonnement : artefacts techniques locaux.
+*_reason_*.jsonl
+# Articles publiés (droits d'auteur) : ne pas diffuser.
+bethune-2011-sur-les-traces-du-rap.pdf
+de Courson B rap français.pdf

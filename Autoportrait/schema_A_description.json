@@ -42,7 +42,7 @@
     ]
    },
    "minItems": 1,
-   "maxItems": 4,
+   "maxItems": 7,
    "uniqueItems": true
   },
   "temporalite": {

@@ -232,7 +232,7 @@ chaque autoportrait selon [consigne_A_description.md](consigne_A_description.md)
 avec une réponse conforme à [schema_A_description.json](schema_A_description.json) :
 
 - `registre` : `egotrip`, `introspection`, `manifeste` ou `mixte` ;
-- `aspects` : 1 à 4 parmi 12, ordonnés du plus au moins important ;
+- `aspects` : 1 à 7 parmi 12, ordonnés du plus au moins important ;
 - `temporalite` : `present`, `passe`, `trajectoire` ou `avenir` ;
 - `demarcation` : figures auxquelles il s'oppose (liste vide possible) ;
 - `regard_des_autres` : `oui` ou `non` ;
@@ -262,7 +262,7 @@ Fonctionnement :
 - Mêmes serveurs vLLM et mode raisonnement qu'en phase 1.
 - xgrammar (vLLM) refuse le mot-clé `uniqueItems`. Le serveur reçoit donc le schéma sans ce mot-clé,
   et l'unicité des listes est vérifiée par le client avec le reste du schéma
-  (valeurs autorisées, 1 à 4 aspects, clés exactes).
+  (valeurs autorisées, 1 à 7 aspects, clés exactes).
 
 Sorties :
 
@@ -278,12 +278,40 @@ Sorties :
 Premier essai réel : 10 autoportraits tirés du lot 1024, 10 descriptions valides.
 L'essai a tourné à environ 0,33 chanson/s, en partageant les serveurs avec la campagne de phase 1 alors en cours.
 
-Les étapes 5 et 6 lisent la version « b » `data/results/autoportrait2_qwen_description_{n_analyse}b.csv` (`n_analyse = 8861` dans la première cellule, valeur par défaut si la configuration n'a pas tourné). L'étape 5 est autonome ; l'étape 6 demande seulement l'étape 5 : ni annotation ni synthèse à relancer.
+Les étapes 5 et 6, Jaccard et l'ACP rechargent le dernier export « b »
+`data/results/autoportrait2_qwen_description_{n}b.csv` à chaque exécution,
+selon sa date de modification. Une annotation relancée avec la même taille
+est donc aussi prise en compte, sans réutiliser les anciennes données en mémoire.
+`n_analyse_force = None` (par défaut, même sans configuration) active ce suivi ;
+un entier impose volontairement un lot historique et est signalé à l'affichage.
+`n_analyse` est désormais calculé depuis le fichier lu, et non réglé séparément.
+L'étape 5 est autonome ; les autres analyses demandent de l'avoir exécutée une fois
+pour définir le chargeur. Après une annotation, réexécuter les cellules d'analyse :
+les sorties déjà affichées ne s'actualisent pas toutes seules.
+Ni annotation ni synthèse à relancer pour recalculer les statistiques.
 
 Étape 5 du carnet, statistiques des aspects : une figure en barres horizontales montre, pour chaque aspect, la part des chansons qui le citent (orange) et la part où il est l'aspect principal (cramoisi), dans la palette hip-hop du dépôt sur fond clair, ainsi que la répartition du nombre d'aspects par chanson. Exports :
 
 - `data/results/autoportrait2_qwen_description_{n}_aspects.csv` ;
 - `images/autoportrait2_aspects_{n}.png`.
+
+Section 5.1 : similarité de Jaccard entre aspects et heatmap annotée (échelle 0 à 1).
+Chaque indice est le nombre de chansons contenant les deux aspects divisé par
+celui des chansons contenant au moins l'un des deux. Les absences communes sont
+ignorées ; une union vide donne une valeur non définie (`ND`, case grise).
+Les calculs d'intersection utilisent des entiers 64 bits pour éviter les débordements.
+Exports : `data/results/autoportrait2_qwen_description_{n}_jaccard.csv`
+et `images/autoportrait2_aspects_jaccard_{n}.png`.
+
+Section 5.2 : ACP centrée-réduite des indicatrices d'aspects (0/1), sur le même lot.
+Les aspects constants sont signalés et exclus. Les cercles unitaires des corrélations
+affichent les plans 1–2, 1–3 et 2–3 selon le rang disponible, avec la variance expliquée.
+Les aspects rares peuvent peser davantage après standardisation. Exports :
+
+- `data/results/autoportrait2_qwen_description_{n}_acp_binaire.csv` ;
+- `data/results/autoportrait2_qwen_description_{n}_acp_correlations.csv` ;
+- `data/results/autoportrait2_qwen_description_{n}_acp_inerties.csv` ;
+- `images/autoportrait2_aspects_acp_{n}.png`.
 
 Étape 6 du carnet, évolution des aspects : douze panneaux, un par aspect, montrent la part annuelle des autoportraits qui citent l'aspect (points), sa moyenne mobile centrée sur 5 ans (`fenetre_lissage`) et celle de l'aspect principal. Le lissage cumule les effectifs de la fenêtre au lieu de moyenner les pourcentages. Un tableau compare les périodes 1990–2003, 2004–2013 et 2014–2024. Exports :
 

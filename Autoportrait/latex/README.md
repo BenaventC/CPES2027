@@ -5,19 +5,41 @@
 - `pipeline.mmd` : source Mermaid de la chaîne de traitement.
 - `pipeline.pdf` : diagramme vectoriel Mermaid inclus dans l'article.
 - `build.sh` : génération du diagramme et compilation.
-- `references.bib` : bibliographie BibTeX, avec Béthune (2011).
+- `references.bib` : bibliographie BibTeX, avec Beaujour (1980) pour la
+  distinction entre autoportrait et autobiographie, Béthune (2011) pour
+  l'écriture et les outils du rappeur, et de Courson (2024) pour la
+  construction du corpus LRFAF à partir de Genius.
 - `annexe_detection.tex` et `annexe_description.tex` : consignes intégrales,
   adaptées à la typographie LaTeX depuis les versions actuelles du dépôt.
 
-La méthode résume les deux consignes et cite Béthune avant leur présentation.
+La partie théorique et la présentation des consignes distinguent les apports
+de Beaujour et de Béthune ; l'ancrage théorique cite la formule de
+*Miroirs d'encre* : « Je ne vous raconterai pas ce que j'ai fait :
+je vais vous dire qui je suis ».
+La conclusion comporte un paragraphe « Disponibilité du code et des données »
+renvoyant au dépôt public
+[BenaventC/CPES2027, dossier Autoportrait](https://github.com/BenaventC/CPES2027/tree/main/Autoportrait)
+(notebooks, consignes et figures ; hors données locales et résultats
+individuels non publiés).
 Les annexes documentent les consignes actuelles, sans certifier leur identité
 avec les versions employées dans la campagne. Leur ajout allonge le document
 au-delà des cinq pages de la première version.
+Les remerciements et la déclaration sur l'usage de l'intelligence
+artificielle figurent sur la première page, sous le bloc de titre,
+en petit corps. Les consignes en annexe sont composées en
+`\footnotesize`.
 
 Les deux figures originales sont incluses par des chemins relatifs depuis
 `../images/` ; conserver cette organisation lors de la compilation.
-Leurs couleurs originales sont préservées. Le nouveau diagramme utilise
-le rose ancien et le vert chartreuse de la palette du projet.
+Leurs couleurs originales sont préservées. Seule la projection MDS
+(`../images/autoportrait2_aspects_mds_8861.png`) est affichée dans
+l'article : double point par aspect — surface orange proportionnelle à la
+part de citation, disque cramoisi à la part de premier rang — dans la
+palette hip-hop du dépôt sur fond clair. La figure des matrices de
+cooccurrences (`../images/autoportrait2_aspects_cooccurrence_8861.png`)
+reste disponible comme pièce complémentaire. Les deux sont produites par
+`../cooccurrences.py`, aligné sur la section 5.2 du notebook. Le diagramme Mermaid
+utilise un fond blanc et des bordures sombres.
 
 ## Compilation
 
@@ -39,12 +61,18 @@ de sécurité de l'environnement.
 
 ## Périmètre scientifique
 
-Les valeurs sont calculées à partir des exports locaux du 28 octobre 2026 :
+Les valeurs sont calculées à partir des exports locaux du 28 octobre 2026,
+archivés dans `../data/results/archive_consigne_v1/` en attendant les
+résultats de la campagne en cours (consigne révisée) :
 
-- `../data/results/autoportrait_qwen_annotation_12938.csv` ;
-- `../data/results/autoportrait2_qwen_description_8861b.csv` ;
-- `../data/results/autoportrait2_qwen_description_8861_aspects.csv` ;
-- `../data/results/autoportrait2_qwen_description_8861_aspects_par_annee.csv`.
+- `autoportrait_qwen_annotation_12938.csv` ;
+- `autoportrait2_qwen_description_8861b.csv` ;
+- `autoportrait2_qwen_description_8861_aspects.csv` ;
+- `autoportrait2_qwen_description_8861_aspects_par_annee.csv` ;
+- `autoportrait2_qwen_description_8861_cooccurrence.csv`,
+  `autoportrait2_qwen_description_8861_phi.csv` et
+  `autoportrait2_qwen_description_8861_mds.csv`, produits par
+  `../cooccurrences.py`.
 
 Le dénominateur des figures est **8 856 descriptions valides**, malgré le
 suffixe `8861` qui correspond au nombre de chansons soumises à la phase 2.
