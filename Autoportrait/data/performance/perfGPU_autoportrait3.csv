@@ -1,0 +1,8 @@
+date_utc,modele,gpu_physique_declare,serveur,perimetre,n,reprises,traitees_session,reussites,erreurs,duree_client_secondes,chansons_par_seconde,workers_gpu,taille_lot,max_tokens,extractions_outils,extractions_noms,extractions_comparaisons
+2026-11-05T15:55:06Z,Qwen/Qwen3-32B,1,http://127.0.0.1:8018/v1,pilote_10,10,0,10,8,2,255.899,0.0391,12,128,8192,10,11,10
+2026-11-05T15:57:37Z,Qwen/Qwen3-32B,1,http://127.0.0.1:8018/v1,pilote_10,10,8,2,8,2,64.517,0.031,12,128,8192,10,11,10
+2026-11-05T17:23:50Z,Qwen/Qwen3-32B,non renseigné,http://127.0.0.1:8018/v1,pilote_10,10,8,2,8,2,64.335,0.0311,12,128,8192,10,11,10
+2026-11-05T18:36:27Z,Qwen/Qwen3-32B,non renseigné,http://127.0.0.1:8018/v1,pilote_100,100,0,100,75,25,3613.583,0.0277,12,128,8192,80,110,88
+2026-11-05T19:26:24Z,Qwen/Qwen3-32B,non renseigné,http://127.0.0.1:8018/v1,pilote_250,250,0,250,99,151,126.8,1.9716,48,128,2048,133,154,151
+2026-11-05T19:36:32Z,Qwen/Qwen3-32B,non renseigné,http://127.0.0.1:8018/v1,pilote_250,250,0,250,182,68,237.456,1.0528,48,128,2048,226,284,214
+2026-11-05T22:03:14Z,Qwen/Qwen3-32B,non renseigné,http://127.0.0.1:8018/v1,complet,8861,0,8861,6610,2251,8634.652,1.0262,48,128,2048,7975,10068,7744

@@ -317,3 +317,35 @@ Les aspects rares peuvent peser davantage après standardisation. Exports :
 
 - `data/results/autoportrait2_qwen_description_{n}_aspects_par_annee.csv` ;
 - `images/autoportrait2_aspects_evolution_{n}.png`.
+
+## Phase 3 : extraction des outils, noms et comparaisons (consigne B)
+
+Le carnet [autoportrait3_qwen3_32b.ipynb](autoportrait3_qwen3_32b.ipynb)
+applique [consigne_B_extraction.md](consigne_B_extraction.md) et
+[schema_B_extraction.json](schema_B_extraction.json) aux mêmes chansons que
+la phase 2 : il lit `autoportrait2_qwen_description_{n_source_A}.csv`, puis
+relit les paroles dans `corpus.csv` par `source_row_index` et vérifie artiste
+et titre. Le périmètre comprend toutes les lignes de l'export A, y compris
+ses erreurs d'annotation, afin de ne pas changer la sélection de chansons.
+Le réglage `n_source_A = 8861` correspond à l'export A actuellement présent ;
+le modifier pour analyser un autre lot ou un échantillon de la phase 2.
+
+Le carnet utilise **un seul endpoint vLLM et un seul GPU**. Vérifier `nvidia-smi`
+avant de démarrer le serveur, choisir un GPU libre et le fixer côté serveur avec
+`CUDA_VISIBLE_DEVICES`. Le carnet vérifie `/v1/models`, limite ses workers à
+`--max-num-seqs`, et ne démarre pas le serveur. Il commence par un pilote
+reproductible de 10 chansons (`taille_echantillon = 10`) ; après examen des
+extractions, définir `taille_echantillon = None` pour traiter tout l'export A.
+
+Sorties dans `data/results/` :
+
+- `autoportrait3_qwen_extraction_{n}.csv` et `.json` : résultats structurés
+  et statut de chaque chanson ;
+- `_elements.csv` : une ligne par outil, nom ou comparaison ;
+- `_distributions.csv` et `_frequences.csv` : effectifs par catégorie et
+  fréquences des mentions ;
+- `_erreurs.csv` et journal JSONL reprenable.
+
+Les paroles ne sont pas exportées. `data/performance/perfGPU_autoportrait3.csv`
+conserve la durée côté client, le débit et les paramètres mono-GPU ; ce ne sont
+pas des mesures directes de l'utilisation ou de la mémoire CUDA.
