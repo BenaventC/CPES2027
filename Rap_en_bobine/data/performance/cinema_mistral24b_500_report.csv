@@ -1,0 +1,2 @@
+﻿date,model,n_chansons,n_detections,n_echecs,duree_s,chansons_par_min,seed,max_chars,max_tokens
+2026-11-10T21:16:17,mistralai/Mistral-Small-3.1-24B-Instruct-2503,500,4316,1,286.8,104.59,42,12000,3072
